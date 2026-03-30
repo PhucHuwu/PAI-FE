@@ -203,10 +203,10 @@ function SmallDropdownRow({ item, isFirst, isLast }: {
   return (
     <Link
       href={item.href}
-      className="flex items-center gap-3 px-5 bg-white hover:bg-orange-100 transition-colors cursor-pointer border-b border-gray-100 last:border-0"
+      className="flex items-center px-5 bg-white hover:bg-orange-100 transition-colors cursor-pointer border-b border-gray-100 last:border-0"
       style={{ minHeight: 91 }}
     >
-      <div className="flex-shrink-0 flex items-center justify-center" style={{ width: 79, paddingLeft: 20 }}>
+      <div className="flex-shrink-0 flex items-center justify-center" style={{ width: 87, paddingLeft: 20, paddingRight: 8 }}>
         <img src={item.imageSrc} alt={item.imageAlt} className="h-[49px] w-[39px] object-contain" />
       </div>
       <p className="font-semibold text-[18px] text-black leading-snug whitespace-nowrap">{item.text}</p>
