@@ -32,6 +32,7 @@ interface NavItemConfig {
   href: string;
   dropdown?: DropdownItem[];
   dropdownWidth?: number;
+  dropdownAlign?: "left" | "right";
 }
 
 // ─── Nav Config ───────────────────────────────────────────────────────────────
@@ -127,6 +128,7 @@ const NAV_ITEMS: NavItemConfig[] = [
     label: "Tài chính",
     href: "/tai-chinh",
     dropdownWidth: 292,
+    dropdownAlign: "right",
     dropdown: [
       { type: "small", href: '/tai-chinh/chinh-sach-uu-dai', text: "Chính sách & Ưu đãi" },
       { type: "small", href: '/tai-chinh/chi-phi-dich-vu', text: "Chi phí & Dịch vụ phổ biến" },
@@ -203,10 +205,10 @@ function SmallDropdownRow({ item, isFirst, isLast }: {
 }
 
 // ─── Dropdown panel ───────────────────────────────────────────────────────────
-function DropdownPanel({ items, width }: { items: DropdownItem[]; width: number }) {
+function DropdownPanel({ items, width, align = "left" }: { items: DropdownItem[]; width: number; align?: "left" | "right" }) {
   return (
     <div
-      className="absolute top-full left-0 z-50 overflow-hidden shadow-[0px_6px_20px_rgba(0,0,0,0.18)]"
+      className={`absolute top-full z-50 overflow-hidden shadow-[0px_6px_20px_rgba(0,0,0,0.18)] ${align === "right" ? "right-0" : "left-0"}`}
       style={{ width, minWidth: width }}
     >
       {items.map((item, i) =>
@@ -263,7 +265,7 @@ function DesktopNavItem({ item }: { item: NavItemConfig }) {
         <div className="absolute top-full left-0 w-full h-1 z-50" />
       )}
       {item.dropdown && open && (
-        <DropdownPanel items={item.dropdown} width={item.dropdownWidth ?? 342} />
+        <DropdownPanel items={item.dropdown} width={item.dropdownWidth ?? 342} align={item.dropdownAlign} />
       )}
     </div>
   );
