@@ -2,6 +2,7 @@
 
 import { useState, useRef, useEffect } from "react";
 import Link from "next/link";
+import { useSearchParams } from 'next/navigation'
 import { StarChart, type StarChartDataPoint } from "@/components/molecules/StarChart";
 import {
   imgLocationDefault,
@@ -449,7 +450,13 @@ function ProvincePanel({ province }: { province: string }) {
 
 // ─── Page ─────────────────────────────────────────────────────────────────────
 export default function DiaDiem() {
+  const searchParams = useSearchParams();
   const [selectedProvince, setSelectedProvince] = useState("");
+
+  useEffect(() => {
+    const province = searchParams.get('province');
+    if (province) setSelectedProvince(province);
+  }, [searchParams]);
 
   const activeLocations = selectedProvince === "Hà Nội" ? hanoiLocations : defaultLocations;
   const resultCount = selectedProvince === "Hà Nội" ? "6" : "1,245";

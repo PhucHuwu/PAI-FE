@@ -11,15 +11,15 @@ const legendData: StarChartDataPoint[] = [
 
 export function LegendCard() {
     return (
-        <div className="rounded-xl bg-white/90 p-4 shadow-md w-[280px]">
+        <div className="rounded-xl bg-white/90 p-3 shadow-md w-[220px]">
             <p className="mb-3 text-sm font-bold text-[#1f2937]">Chú thích tiêu chí PAI</p>
             <div className="flex items-center justify-center">
                 <StarChart
                     data={legendData}
-                    width={220}
-                    height={220}
+                    width={155}
+                    height={155}
                     showCriteriaLabels
-                    labelOffset={8}
+                    labelOffset={5}
                     maxLabelCharsPerLine={10}
                 />
             </div>

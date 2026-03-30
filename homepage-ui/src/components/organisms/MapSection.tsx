@@ -2,8 +2,9 @@
 
 import React, { useState, useEffect, useRef } from "react";
 import dynamic from "next/dynamic";
+import { useRouter } from 'next/navigation'
 import svgPaths from '@/assets/import/svg-0oavri3lkq';
-import starPaths from '@/assets/import/svg-a1gxlu5vx';
+import { StarChart, type StarChartDataPoint } from '@/components/molecules/StarChart'
 import mainPicImage from "@/public/assets/mainpic.jpeg";
 import globalIcon from "@/public/assets/global-icon.svg";
 import handPointerIcon from "@/public/assets/hand-icon.png";
@@ -92,7 +93,15 @@ const PROVINCE_PAI: Record<string, { rank: number; score: number }> = {
 
 // ─── Province Info Card (PAI Panel) ──────────────────────────────────────────
 function ProvinceInfoCard({ provinceName, provinceId }: { provinceName: string; provinceId: string }) {
+  const router = useRouter();
   const pai = PROVINCE_PAI[provinceId] ?? { rank: 34, score: 50 };
+  const chartData: StarChartDataPoint[] = [
+    { criterion: 'Hạ tầng sẵn có', value: Math.max(1, Math.min(5, Math.round(pai.score / 20) + 1)), fullMark: 5 },
+    { criterion: 'Hỗ trợ tài chính', value: Math.max(1, Math.min(5, Math.round((pai.score - 8) / 20) + 1)), fullMark: 5 },
+    { criterion: 'Hỗ trợ thông tin', value: Math.max(1, Math.min(5, Math.round((pai.score + 6) / 20) + 1)), fullMark: 5 },
+    { criterion: 'Hỗ trợ tại thực địa', value: Math.max(1, Math.min(5, Math.round((pai.score - 3) / 20) + 1)), fullMark: 5 },
+    { criterion: 'Hỗ trợ thủ tục pháp lý', value: Math.max(1, Math.min(5, Math.round((pai.score + 2) / 20) + 1)), fullMark: 5 },
+  ];
 
   return (
     <div
@@ -118,43 +127,18 @@ function ProvinceInfoCard({ provinceName, provinceId }: { provinceName: string; 
         </div>
 
         {/* Khám phá thêm button */}
-        <div
+        <button
           className="absolute bg-[#a71a1a] rounded-[100px] flex items-center justify-center cursor-pointer hover:bg-[#c41f1f] transition-colors"
+          onClick={() => router.push(`/dia-diem?province=${encodeURIComponent(provinceName)}`)}
           style={{ bottom: 12, left: 14, right: 16, height: 36 }}
         >
           <span className="text-white font-semibold" style={{ fontSize: 17 }}>Khám phá thêm</span>
-        </div>
+        </button>
       </div>
 
       {/* Star overlay – centered on the card */}
-      <div className="absolute pointer-events-none" style={{ top: 72, left: 78, width: 112, height: 106 }}>
-        {/* Decorative dashed grid */}
-        <svg className="absolute inset-0 w-full h-full" fill="none" preserveAspectRatio="none" viewBox="0 0 114.685 109.211">
-          <path d={starPaths.p3b1d980} stroke="#E4AB24" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.8346" />
-          <path d={starPaths.p82b4d80} stroke="#E4AB24" strokeDasharray="5.39 5.39" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.8346" />
-          <path d={starPaths.p3a593de0} stroke="#E4AB24" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.8346" />
-          <path d="M75.9536 42.0503H109.631" stroke="#E4AB24" strokeDasharray="5.39 5.39" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.8346" />
-          <path d={starPaths.pcd34f00} stroke="#E4AB24" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.8346" />
-          <path d={starPaths.p872a980} stroke="#E4AB24" strokeDasharray="5.39 5.39" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.8346" />
-          <path d={starPaths.p36d58700} stroke="#E4AB24" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.8346" />
-          <path d={starPaths.p3e7afc00} stroke="#E4AB24" strokeDasharray="5.39 5.39" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.8346" />
-          <path d={starPaths.p1ae63540} stroke="#E4AB24" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.8346" />
-          <path d={starPaths.p20b8f5a0} stroke="#E4AB24" strokeDasharray="5.39 5.39" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.8346" />
-          <path d={starPaths.p33401380} stroke="#E4AB24" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.8346" />
-          <path d={starPaths.pa5e2a00} stroke="#E4AB24" strokeDasharray="5.39 5.39" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.8346" />
-          <path d={starPaths.p9e98680} stroke="#E4AB24" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.8346" />
-          <path d={starPaths.p3102d300} stroke="#E4AB24" strokeDasharray="5.39 5.39" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.8346" />
-          <path d={starPaths.pdf82600} stroke="#E4AB24" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.8346" />
-          <path d={starPaths.p32c3c400} stroke="#E4AB24" strokeDasharray="5.39 5.39" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.8346" />
-          <path d={starPaths.p2e86cb00} stroke="#E4AB24" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.8346" />
-          <path d="M6.82659 42.0503H40.5036" stroke="#E4AB24" strokeDasharray="5.39 5.39" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.8346" />
-          <path d={starPaths.p5864e00} stroke="#E4AB24" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.8346" />
-          <path d={starPaths.p667e800} stroke="#E4AB24" strokeDasharray="5.39 5.39" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.8346" />
-        </svg>
-        {/* Filled yellow star */}
-        <svg className="absolute inset-0 w-full h-full" fill="none" preserveAspectRatio="none" viewBox="0 0 111.851 106.373">
-          <path d={starPaths.p38e3a480} fill="#E4AB24" />
-        </svg>
+      <div className="absolute pointer-events-none" style={{ top: 70, left: 74, width: 118, height: 112 }}>
+        <StarChart data={chartData} width={118} height={112} />
       </div>
     </div>
   );
@@ -484,7 +468,7 @@ function VietnamMap({ onProvinceClick, onProvinceHover }: MapInteractiveProps) {
 export const MapSection: React.FC = () => {
   const [isMapOpen, setIsMapOpen] = useState(false);
   const [initialProvince, setInitialProvince] = useState<string | null>(null);
-  // Default to Hà Nội (rank 1); updates on hover, resets on mouse-leave
+  // Default to Hà Nội (rank 1); updates on hover and keeps the last hovered province
   const [hoveredProvinceId, setHoveredProvinceId] = useState<string>("HaNoi");
   const [hoveredProvinceName, setHoveredProvinceName] = useState<string>("Hà Nội");
 
@@ -499,13 +483,9 @@ export const MapSection: React.FC = () => {
   };
 
   const handleProvinceHover = (id: string | null, name: string | null) => {
-    if (id === null || name === null) {
-      setHoveredProvinceId("HaNoi");
-      setHoveredProvinceName("Hà Nội");
-    } else {
-      setHoveredProvinceId(id);
-      setHoveredProvinceName(name);
-    }
+    if (id === null || name === null) return;
+    setHoveredProvinceId(id);
+    setHoveredProvinceName(name);
   };
 
   return (
