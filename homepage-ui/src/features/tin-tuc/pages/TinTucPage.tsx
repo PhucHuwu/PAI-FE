@@ -5,7 +5,7 @@ import Link from "next/link";
 import { imgBgLandscape, imgFooterLogo } from "@/assets";
 import svgPaths from "@/imports/svg-3nhau68ioe";
 import svgFilter from "@/imports/svg-sn77ftf7a8";
-const imgNewsMain = "/assets/hand-icon.png";
+const imgNewsMain = "/assets/mainpic.jpeg";
 // ─── Types ────────────────────────────────────────────────────────────────────
 type Region = "Tất cả tỉnh thành" | "Miền Bắc" | "Miền Trung" | "Miền Nam";
 

@@ -13,8 +13,8 @@ import {
 import svgPaths from "@/imports/svg-d42iy7c4yq";
 
 // Images from the Figma file
-const imgHeroBanner = "/assets/hand-icon.png";
-const imgCameraCrew = "/assets/hand-icon.png";
+const imgHeroBanner = "/assets/mainpic.jpeg";
+const imgCameraCrew = "/assets/mainpic.jpeg";
 // ─── Types ────────────────────────────────────────────────────────────────────
 interface ProvinceCard {
   id: string;

@@ -1,9 +1,9 @@
 import svgPaths from "./svg-d42iy7c4yq";
-const imgImage17 = "/assets/hand-icon.png";
-const imgRectangle269 = "/assets/hand-icon.png";
-const imgImage5 = "/assets/hand-icon.png";
-const imgThemTieuD21 = "/assets/hand-icon.png";
-const imgImage72 = "/assets/hand-icon.png";
+const imgImage17 = "/assets/mainpic.jpeg";
+const imgRectangle269 = "/assets/mainpic.jpeg";
+const imgImage5 = "/assets/mainpic.jpeg";
+const imgThemTieuD21 = "/assets/mainpic.jpeg";
+const imgImage72 = "/assets/mainpic.jpeg";
 function StateLayer() {
   return (
     <div className="content-stretch flex items-center justify-center p-[8px] relative shrink-0" data-name="state-layer">

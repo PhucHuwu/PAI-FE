@@ -1,14 +1,14 @@
 import svgPaths from "./svg-4ci4608fnf";
-const imgImage5 = "/assets/hand-icon.png";
-const imgThemTieuD21 = "/assets/hand-icon.png";
-const imgImage72 = "/assets/hand-icon.png";
-const imgImage67 = "/assets/hand-icon.png";
-const imgE772E43AF0534D8399F32B95316125911 = "/assets/hand-icon.png";
-const imgRectangle336 = "/assets/hand-icon.png";
-const imgRectangle337 = "/assets/hand-icon.png";
-const imgRectangle338 = "/assets/hand-icon.png";
-const imgRectangle339 = "/assets/hand-icon.png";
-const imgRectangle340 = "/assets/hand-icon.png";
+const imgImage5 = "/assets/mainpic.jpeg";
+const imgThemTieuD21 = "/assets/mainpic.jpeg";
+const imgImage72 = "/assets/mainpic.jpeg";
+const imgImage67 = "/assets/mainpic.jpeg";
+const imgE772E43AF0534D8399F32B95316125911 = "/assets/mainpic.jpeg";
+const imgRectangle336 = "/assets/mainpic.jpeg";
+const imgRectangle337 = "/assets/mainpic.jpeg";
+const imgRectangle338 = "/assets/mainpic.jpeg";
+const imgRectangle339 = "/assets/mainpic.jpeg";
+const imgRectangle340 = "/assets/mainpic.jpeg";
 function Frame1() {
   return (
     <div className="absolute content-stretch flex gap-[37px] items-center left-[1112px] top-[39px]">

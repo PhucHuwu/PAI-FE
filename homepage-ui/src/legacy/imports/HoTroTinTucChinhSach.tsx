@@ -1,8 +1,8 @@
 import svgPaths from "./svg-3z3elz4r7x";
-const imgImage17 = "/assets/hand-icon.png";
-const imgImage5 = "/assets/hand-icon.png";
-const imgThemTieuD21 = "/assets/hand-icon.png";
-const imgImage72 = "/assets/hand-icon.png";
+const imgImage17 = "/assets/mainpic.jpeg";
+const imgImage5 = "/assets/mainpic.jpeg";
+const imgThemTieuD21 = "/assets/mainpic.jpeg";
+const imgImage72 = "/assets/mainpic.jpeg";
 function Frame4() {
   return (
     <div className="absolute content-stretch flex gap-[37px] items-center left-[calc(75%+32px)] top-[39px]">

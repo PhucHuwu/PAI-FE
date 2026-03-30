@@ -1,11 +1,11 @@
 import svgPaths from "./svg-hdwo2bohsv";
-const imgRectangle241 = "/assets/hand-icon.png";
-const imgRectangle242 = "/assets/hand-icon.png";
-const imgRectangle243 = "/assets/hand-icon.png";
-const imgRectangle244 = "/assets/hand-icon.png";
-const imgRectangle245 = "/assets/hand-icon.png";
-const imgRectangle246 = "/assets/hand-icon.png";
-const img171 = "/assets/hand-icon.png";
+const imgRectangle241 = "/assets/mainpic.jpeg";
+const imgRectangle242 = "/assets/mainpic.jpeg";
+const imgRectangle243 = "/assets/mainpic.jpeg";
+const imgRectangle244 = "/assets/mainpic.jpeg";
+const imgRectangle245 = "/assets/mainpic.jpeg";
+const imgRectangle246 = "/assets/mainpic.jpeg";
+const img171 = "/assets/mainpic.jpeg";
 function NutXacMinh() {
   return (
     <div className="absolute contents left-[20px] top-[393px]" data-name="nút xác minh">

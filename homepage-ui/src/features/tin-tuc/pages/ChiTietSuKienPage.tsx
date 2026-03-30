@@ -7,7 +7,7 @@ import svgPaths from "@/imports/svg-h2fd5sjp1i";
 import svgFilter from "@/imports/svg-r1ys8dctmr";
 
 // Figma assets
-const imgEventBanner = "/assets/hand-icon.png";
+const imgEventBanner = "/assets/mainpic.jpeg";
 type FilterType = "Tất cả" | "Đã diễn ra" | "Đang diễn ra" | "Sắp diễn ra";
 const FILTER_OPTIONS: FilterType[] = ["Tất cả", "Đã diễn ra", "Đang diễn ra", "Sắp diễn ra"];
 

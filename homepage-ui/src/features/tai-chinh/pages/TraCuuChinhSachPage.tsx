@@ -4,7 +4,7 @@ import { useState } from "react";
 import Link from "next/link";
 import { imgFooterLogo } from "@/assets";
 import svgPaths from "@/imports/svg-7sopmc8ds3";
-const imgRectangle300 = "/assets/hand-icon.png";
+const imgRectangle300 = "/assets/mainpic.jpeg";
 // ─── Province Data ────────────────────────────────────────────────────────────
 type ProvinceKey = keyof typeof PROVINCE_DB;
 

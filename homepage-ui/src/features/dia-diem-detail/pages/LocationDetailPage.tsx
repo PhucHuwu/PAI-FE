@@ -4,16 +4,16 @@ import { useState } from "react";
 import { useParams, useRouter } from "next/navigation";
 import { StarChart, type StarChartDataPoint } from "@/components/molecules/StarChart";
 import svgPaths from "@/imports/svg-6kz2gzxz6l";
-const imgRectangle235 = "/assets/hand-icon.png";
-const imgImage50 = "/assets/hand-icon.png";
-const imgImage51 = "/assets/hand-icon.png";
-const imgImage52 = "/assets/hand-icon.png";
-const imgScreenshot202603171837341 = "/assets/hand-icon.png";
-const imgImage56 = "/assets/hand-icon.png";
-const imgImage59 = "/assets/hand-icon.png";
-const imgImage57 = "/assets/hand-icon.png";
-const imgImage58 = "/assets/hand-icon.png";
-const imgGroup481 = "/assets/hand-icon.png";
+const imgRectangle235 = "/assets/mainpic.jpeg";
+const imgImage50 = "/assets/mainpic.jpeg";
+const imgImage51 = "/assets/mainpic.jpeg";
+const imgImage52 = "/assets/mainpic.jpeg";
+const imgScreenshot202603171837341 = "/assets/mainpic.jpeg";
+const imgImage56 = "/assets/mainpic.jpeg";
+const imgImage59 = "/assets/mainpic.jpeg";
+const imgImage57 = "/assets/mainpic.jpeg";
+const imgImage58 = "/assets/mainpic.jpeg";
+const imgGroup481 = "/assets/mainpic.jpeg";
 import { ImageViewer } from "@/features/dia-diem-detail/components/ImageViewer";
 
 // ─── Hero Image ─────────────────────────────────────────────────────────────

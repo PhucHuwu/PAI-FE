@@ -1,8 +1,8 @@
 import svgPaths from "./svg-244btzughu";
-const imgImage17 = "/assets/hand-icon.png";
-const imgImage5 = "/assets/hand-icon.png";
-const imgThemTieuD21 = "/assets/hand-icon.png";
-const imgImage72 = "/assets/hand-icon.png";
+const imgImage17 = "/assets/mainpic.jpeg";
+const imgImage5 = "/assets/mainpic.jpeg";
+const imgThemTieuD21 = "/assets/mainpic.jpeg";
+const imgImage72 = "/assets/mainpic.jpeg";
 function Frame() {
   return (
     <div className="absolute border border-[#d5d5d5] border-solid h-[43.4px] left-[calc(75%+23px)] overflow-clip rounded-bl-[8px] rounded-tl-[8px] top-[calc(60%+379.8px)] w-[39.2px]">

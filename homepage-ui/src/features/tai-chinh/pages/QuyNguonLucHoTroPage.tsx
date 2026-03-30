@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { imgFooterLogo } from "@/assets";
 import svgPaths from "@/imports/svg-ygkhtzbem5";
-const imgHeroBg = "/assets/hand-icon.png";
+const imgHeroBg = "/assets/mainpic.jpeg";
 // ─── Vietnam Map (small, dark red) ────────────────────────────────────────────
 function VietnamMapSmall() {
   return (

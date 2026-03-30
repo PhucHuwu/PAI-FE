@@ -4,8 +4,8 @@ import { useState } from "react";
 import Link from "next/link";
 import { imgFooterLogo } from "@/assets";
 import svgPaths from "@/imports/svg-rksprpkot8";
-const imgRectangle347 = "/assets/hand-icon.png";
-const imgRectangle300 = "/assets/hand-icon.png";
+const imgRectangle347 = "/assets/mainpic.jpeg";
+const imgRectangle300 = "/assets/mainpic.jpeg";
 // ─── Types ────────────────────────────────────────────────────────────────────
 type Region = "Tất cả vùng" | "Miền Bắc" | "Miền Trung" | "Miền Nam";
 const REGIONS: Region[] = ["Tất cả vùng", "Miền Bắc", "Miền Trung", "Miền Nam"];

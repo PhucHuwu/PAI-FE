@@ -3,13 +3,13 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import svgPaths from "@/imports/svg-12aspj3ovn";
-const imgImage57 = "/assets/hand-icon.png";
-const imgRectangle251 = "/assets/hand-icon.png";
-const imgRectangle267 = "/assets/hand-icon.png";
-const imgRectangle252 = "/assets/hand-icon.png";
-const imgRectangle253 = "/assets/hand-icon.png";
-const imgRectangle254 = "/assets/hand-icon.png";
-const imgRectangle255 = "/assets/hand-icon.png";
+const imgImage57 = "/assets/mainpic.jpeg";
+const imgRectangle251 = "/assets/mainpic.jpeg";
+const imgRectangle267 = "/assets/mainpic.jpeg";
+const imgRectangle252 = "/assets/mainpic.jpeg";
+const imgRectangle253 = "/assets/mainpic.jpeg";
+const imgRectangle254 = "/assets/mainpic.jpeg";
+const imgRectangle255 = "/assets/mainpic.jpeg";
 
 // ─── Info Cards ───────────────────────────────────────────────────────────────
 interface InfoCardProps {

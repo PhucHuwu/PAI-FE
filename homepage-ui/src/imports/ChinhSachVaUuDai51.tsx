@@ -1,8 +1,8 @@
 import svgPaths from "./svg-rksprpkot8";
-const imgRectangle347 = "/assets/hand-icon.png";
-const imgRectangle300 = "/assets/hand-icon.png";
-const imgImage5 = "/assets/hand-icon.png";
-const imgImage72 = "/assets/hand-icon.png";
+const imgRectangle347 = "/assets/mainpic.jpeg";
+const imgRectangle300 = "/assets/mainpic.jpeg";
+const imgImage5 = "/assets/mainpic.jpeg";
+const imgImage72 = "/assets/mainpic.jpeg";
 function Frame1() {
   return (
     <div className="absolute bg-white h-[480px] left-0 overflow-clip top-[196px] w-[1440px]">

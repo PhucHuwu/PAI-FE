@@ -1,8 +1,8 @@
 import svgPaths from "./svg-frax4ywxjs";
-const imgImage17 = "/assets/hand-icon.png";
-const imgImage5 = "/assets/hand-icon.png";
-const imgThemTieuD21 = "/assets/hand-icon.png";
-const imgImage72 = "/assets/hand-icon.png";
+const imgImage17 = "/assets/mainpic.jpeg";
+const imgImage5 = "/assets/mainpic.jpeg";
+const imgThemTieuD21 = "/assets/mainpic.jpeg";
+const imgImage72 = "/assets/mainpic.jpeg";
 function Frame5() {
   return (
     <div className="absolute font-['Inter:Regular',sans-serif] font-normal h-[1224px] leading-[0] left-[calc(25%+179px)] not-italic text-[36px] text-black text-center top-[431px] w-[513px]">

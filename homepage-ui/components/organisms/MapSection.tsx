@@ -6,7 +6,7 @@ import svgPaths from "@/public/import/svg-0oavri3lkq";
 import starPaths from "@/public/import/svg-a1gxlu5vx";
 import imgVinhHaLong from "@/public/assets/danh-lam-thang-canh-viet-nam.png";
 import globalIcon from "@/public/assets/global-icon.svg";
-import handPointerIcon from "@/public/assets/hand-icon.png";
+import handPointerIcon from "@/public/assets/mainpic.jpeg";
 
 const LeafletMapModal = dynamic(
   () => import('./LeafletMapModal').then((mod) => mod.LeafletMapModal),

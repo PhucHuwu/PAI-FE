@@ -10,7 +10,7 @@ import svgPaths from "@/imports/svg-9dgyajseqp";
 import svgFilter from "@/imports/svg-r1ys8dctmr";
 
 // ─── Figma image ──────────────────────────────────────────────────────────────
-const imgEventCard = "/assets/hand-icon.png";
+const imgEventCard = "/assets/mainpic.jpeg";
 // ─── Types ───────────────────────────────────────────────────────────────────
 type StatusType = "Đã diễn ra" | "Đang diễn ra" | "Sắp diễn ra";
 type FilterType = "Tất cả" | StatusType;

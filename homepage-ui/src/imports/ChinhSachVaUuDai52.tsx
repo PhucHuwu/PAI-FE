@@ -1,8 +1,8 @@
 import svgPaths from "./svg-7sopmc8ds3";
-const imgRectangle347 = "/assets/hand-icon.png";
-const imgImage5 = "/assets/hand-icon.png";
-const imgImage72 = "/assets/hand-icon.png";
-const imgRectangle300 = "/assets/hand-icon.png";
+const imgRectangle347 = "/assets/mainpic.jpeg";
+const imgImage5 = "/assets/mainpic.jpeg";
+const imgImage72 = "/assets/mainpic.jpeg";
+const imgRectangle300 = "/assets/mainpic.jpeg";
 function Frame2() {
   return (
     <div className="absolute content-stretch flex font-['Inter:Extra_Bold',sans-serif] font-extrabold gap-[68px] items-center leading-[normal] left-[67.5px] not-italic text-[#fb7104] text-[24px] top-[136px] whitespace-nowrap">

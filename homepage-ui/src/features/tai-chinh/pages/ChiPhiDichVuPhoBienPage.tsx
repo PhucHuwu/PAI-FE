@@ -4,12 +4,12 @@ import Link from "next/link";
 import { imgFooterLogo } from "@/assets";
 import { ImageWithFallback } from "../../components/figma/ImageWithFallback";
 import svgPaths from "@/imports/svg-x9r640id0u";
-const imgHeroBg = "/assets/hand-icon.png";
-const imgRectangle336 = "/assets/hand-icon.png";
-const imgRectangle337 = "/assets/hand-icon.png";
-const imgRectangle338 = "/assets/hand-icon.png";
-const imgRectangle339 = "/assets/hand-icon.png";
-const imgRectangle340 = "/assets/hand-icon.png";
+const imgHeroBg = "/assets/mainpic.jpeg";
+const imgRectangle336 = "/assets/mainpic.jpeg";
+const imgRectangle337 = "/assets/mainpic.jpeg";
+const imgRectangle338 = "/assets/mainpic.jpeg";
+const imgRectangle339 = "/assets/mainpic.jpeg";
+const imgRectangle340 = "/assets/mainpic.jpeg";
 // ─── Vietnam Map (dark red for this page) ─────────────────────────────────────
 function VietnamMapRed({ className = "" }: { className?: string }) {
   return (
