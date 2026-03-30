@@ -132,7 +132,7 @@ const NAV_ITEMS: NavItemConfig[] = [
   {
     label: "Tài chính",
     href: "/tai-chinh",
-    dropdownWidth: 292,
+    dropdownWidth: 332,
     dropdownAlign: "right",
     dropdown: [
       {
@@ -203,13 +203,13 @@ function SmallDropdownRow({ item, isFirst, isLast }: {
   return (
     <Link
       href={item.href}
-      className="flex items-center px-5 bg-white hover:bg-orange-100 transition-colors cursor-pointer border-b border-gray-100 last:border-0"
+      className="flex items-center pl-5 pr-6 bg-white hover:bg-orange-100 transition-colors cursor-pointer border-b border-gray-100 last:border-0"
       style={{ minHeight: 91 }}
     >
       <div className="flex-shrink-0 flex items-center justify-center" style={{ width: 87, paddingLeft: 20, paddingRight: 8 }}>
         <img src={item.imageSrc} alt={item.imageAlt} className="h-[49px] w-[39px] object-contain" />
       </div>
-      <p className="font-semibold text-[18px] text-black leading-snug whitespace-nowrap">{item.text}</p>
+      <p className="font-semibold text-[18px] text-black leading-snug">{item.text}</p>
     </Link>
   );
 }
@@ -218,8 +218,8 @@ function SmallDropdownRow({ item, isFirst, isLast }: {
 function DropdownPanel({ items, width, align = "left" }: { items: DropdownItem[]; width: number; align?: "left" | "right" }) {
   return (
     <div
-      className={`absolute top-full z-50 overflow-hidden shadow-[0px_6px_20px_rgba(0,0,0,0.18)] ${align === "right" ? "right-0" : "left-0"}`}
-      style={{ width, minWidth: width }}
+      className={`absolute top-full z-50 overflow-hidden shadow-[0px_6px_20px_rgba(0,0,0,0.18)] ${align === "right" ? "right-2" : "left-0"}`}
+      style={{ width: `min(${width}px, calc(100vw - 24px))` }}
     >
       {items.map((item, i) =>
         item.type === "large" ? (
