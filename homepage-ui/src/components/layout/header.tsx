@@ -10,6 +10,9 @@ import svgThuTuc from '@/assets/import/svg-5f8ts2r75e';
 import svgHoTro from '@/assets/import/svg-1olhhx3kod';
 import svgTinTuc from '@/assets/import/svg-0kyd8xp00s';
 import svgTaiChinh from '@/assets/import/svg-azm0jqzmsu';
+import financePolicyOffersIcon from '@/public/assets/finance-policy-offers.svg'
+import financeServiceCostsIcon from '@/public/assets/finance-service-costs.svg'
+import financeFundSupportIcon from '@/public/assets/finance-fund-support.svg'
 
 // ─── Types ────────────────────────────────────────────────────────────────────
 interface LargeDropdownItem {
@@ -24,6 +27,8 @@ interface SmallDropdownItem {
   type: "small";
   href: string;
   text: string;
+  imageSrc: string;
+  imageAlt: string;
 }
 type DropdownItem = LargeDropdownItem | SmallDropdownItem;
 
@@ -130,9 +135,27 @@ const NAV_ITEMS: NavItemConfig[] = [
     dropdownWidth: 292,
     dropdownAlign: "right",
     dropdown: [
-      { type: "small", href: '/tai-chinh/chinh-sach-uu-dai', text: "Chính sách & Ưu đãi" },
-      { type: "small", href: '/tai-chinh/chi-phi-dich-vu', text: "Chi phí & Dịch vụ phổ biến" },
-      { type: "small", href: '/tai-chinh/quy-nguon-luc', text: "Quỹ & Nguồn hỗ trợ" },
+      {
+        type: "small",
+        href: '/tai-chinh/chinh-sach-uu-dai',
+        text: "Chính sách & Ưu đãi",
+        imageSrc: financePolicyOffersIcon.src,
+        imageAlt: 'Chính sách và ưu đãi',
+      },
+      {
+        type: "small",
+        href: '/tai-chinh/chi-phi-dich-vu',
+        text: "Chi phí & Dịch vụ phổ biến",
+        imageSrc: financeServiceCostsIcon.src,
+        imageAlt: 'Chi phí và dịch vụ phổ biến',
+      },
+      {
+        type: "small",
+        href: '/tai-chinh/quy-nguon-luc',
+        text: "Quỹ & Nguồn hỗ trợ",
+        imageSrc: financeFundSupportIcon.src,
+        imageAlt: 'Quỹ và nguồn hỗ trợ',
+      },
     ],
   },
 ];
@@ -183,21 +206,8 @@ function SmallDropdownRow({ item, isFirst, isLast }: {
       className="flex items-center gap-3 px-5 bg-white hover:bg-orange-100 transition-colors cursor-pointer border-b border-gray-100 last:border-0"
       style={{ minHeight: 91 }}
     >
-      {/* Orange chevron arrow */}
-      <div className="flex-shrink-0" style={{ width: 12, height: 14 }}>
-        <svg
-          className="w-full h-full"
-          fill="none"
-          preserveAspectRatio="none"
-          viewBox="0 0 12.1036 13.479"
-        >
-          <path
-            d={svgTaiChinh.p3ef4fb80}
-            stroke="#FB7104"
-            strokeLinecap="round"
-            strokeWidth="2"
-          />
-        </svg>
+      <div className="flex-shrink-0 flex items-center justify-center" style={{ width: 79, paddingLeft: 20 }}>
+        <img src={item.imageSrc} alt={item.imageAlt} className="h-[49px] w-[39px] object-contain" />
       </div>
       <p className="font-semibold text-[18px] text-black leading-snug whitespace-nowrap">{item.text}</p>
     </Link>
