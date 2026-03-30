@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Link } from "react-router";
 import { Navbar } from "../components/Navbar";
+import { ProvinceDropdown } from "../components/ProvinceDropdown";
 import {
   imgBgLandscape,
   imgFooterLogo,
@@ -170,7 +171,7 @@ function Sidebar({
 
         {/* Location dropdowns */}
         <div className="px-4 pb-4 flex flex-col gap-3">
-          <SidebarDropdown label="Tỉnh / Thành phố" />
+          <ProvinceDropdown />
           <SidebarDropdown label="Xã / Phường" />
         </div>
 

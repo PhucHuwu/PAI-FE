@@ -9,12 +9,19 @@ const NAV_LINKS = [
     label: "Thủ tục/ Giấy phép",
     path: "/thu-tuc-giay-phep",
     children: [
-      { label: "Văn bản pháp luật",  path: "/thu-tuc-giay-phep/van-ban-phap-luat" },
-      { label: "Quy trình cấp phép", path: "/thu-tuc-giay-phep/quy-trinh-cap-phep" },
+      { label: "Văn bản pháp luật",   path: "/thu-tuc-giay-phep/van-ban-phap-luat" },
+      { label: "Quy trình cấp phép",  path: "/thu-tuc-giay-phep/quy-trinh-cap-phep" },
       { label: "Mẫu đơn / Biểu mẫu", path: "/thu-tuc-giay-phep/ho-so-giay-phep" },
     ],
   },
-  { label: "Hỗ trợ thực địa",    path: "/ho-tro-thuc-dia",    children: null },
+  {
+    label: "Hỗ trợ thực địa",
+    path: "/ho-tro-thuc-dia",
+    children: [
+      { label: "Điều phối cơ quan chức năng", path: "/ho-tro-thuc-dia/dieu-phoi-co-quan-chuc-nang" },
+      { label: "Kết nối cộng đồng", path: "/ho-tro-thuc-dia/ket-noi-cong-dong" },
+    ],
+  },
   { label: "Tin tức",             path: "/tin-tuc",            children: null },
   { label: "Tài chính",           path: "/tai-chinh",          children: null },
 ];
