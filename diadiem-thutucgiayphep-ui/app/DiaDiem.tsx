@@ -1,8 +1,5 @@
 import { useState, useRef, useEffect } from "react";
 import {
-  // ── images ──────────────────────────────────────────────────────────────────
-  imgUserAvatar,
-  imgLogo,
   imgLocationDefault,
   imgPAIChart,
   imgHoHoanKiem,
@@ -11,7 +8,6 @@ import {
   imgHoangThanhThangLong,
   imgNhaThoLon,
   imgChuaThay,
-  // ── svg paths ───────────────────────────────────────────────────────────────
   svgSearch,
   svgCheckmark,
   svgChevronUp,
@@ -20,6 +16,7 @@ import {
   svgHeartFilled,
   svgSpinner,
 } from "../assets";
+import { Navbar } from "./components/Navbar";
 
 // ─── Verified Badge ───────────────────────────────────────────────────────────
 function VerifiedBadge() {
@@ -278,10 +275,8 @@ function Sidebar({
 
   return (
     <aside className="w-[280px] shrink-0 flex flex-col gap-4 pt-2">
-      {/* Title */}
       <h2 className="font-semibold text-black text-3xl">BỘ LỌC</h2>
 
-      {/* Khu vực */}
       <div className="flex flex-col gap-3">
         <span className="font-semibold text-black text-lg">Khu vực</span>
         <ProvinceDropdown value={selectedProvince} onChange={onProvinceChange} />
@@ -290,7 +285,6 @@ function Sidebar({
 
       <div className="w-full h-px bg-black" />
 
-      {/* Loại hình */}
       <div className="flex flex-col gap-1">
         <span className="font-semibold text-black text-lg mb-1">Loại hình</span>
         <FilterRow
@@ -308,90 +302,39 @@ function Sidebar({
         />
         <FilterRow
           label="Cảnh quan & danh lam thắng cảnh"
-          subOptions={[
-            "Núi",
-            "Biển",
-            "Sông / Hồ",
-            "Hang động",
-            "Thác nước",
-            "Rừng",
-            "Ruộng bậc thang",
-            "Đồi / Cao nguyên",
-          ]}
+          subOptions={["Núi", "Biển", "Sông / Hồ", "Hang động", "Thác nước", "Rừng", "Ruộng bậc thang", "Đồi / Cao nguyên"]}
         />
         <FilterRow
           label="Không gian công cộng"
-          subOptions={[
-            "Phố xá / Hẻm",
-            "Quảng trường",
-            "Công viên",
-            "Phố đi bộ",
-            "Chợ",
-            "Bến tàu / Bến xe",
-            "Cầu",
-          ]}
+          subOptions={["Phố xá / Hẻm", "Quảng trường", "Công viên", "Phố đi bộ", "Chợ", "Bến tàu / Bến xe", "Cầu"]}
         />
         <FilterRow
           label="Công trình - địa điểm nhà nước"
-          subOptions={[
-            "Di tích lịch sử",
-            "Bảo tàng",
-            "Đền / Chùa / Miếu",
-            "Nhà hát",
-            "Trường công",
-            "Bệnh viện công",
-            "Cơ quan hành chính",
-          ]}
+          subOptions={["Di tích lịch sử", "Bảo tàng", "Đền / Chùa / Miếu", "Nhà hát", "Trường công", "Bệnh viện công", "Cơ quan hành chính"]}
         />
         <FilterRow
           label="Studio & Không gian quay dựng"
-          subOptions={[
-            "Studio trong nhà",
-            "Studio ngoài trời",
-            "Phim trường",
-            "Studio chụp ảnh",
-            "Studio TV / Livestream",
-            "Phòng Green Screen",
-            "Phòng White Cyclorama",
-            "Warehouse Studio",
-          ]}
+          subOptions={["Studio trong nhà", "Studio ngoài trời", "Phim trường", "Studio chụp ảnh", "Studio TV / Livestream", "Phòng Green Screen", "Phòng White Cyclorama", "Warehouse Studio"]}
         />
         <FilterRow
           label="Phong cách chủ đạo"
-          subOptions={[
-            "Hoang sơ",
-            "Hùng vĩ",
-            "Thơ mộng",
-            "Truyền thống",
-            "Lịch sử",
-            "Bao cấp",
-            "Cổ điển",
-            "Hiện đại",
-            "Công nghiệp",
-            "Nghệ thuật",
-            "Đời thường",
-            "Trang nghiêm",
-          ]}
+          subOptions={["Hoang sơ", "Hùng vĩ", "Thơ mộng", "Truyền thống", "Lịch sử", "Bao cấp", "Cổ điển", "Hiện đại", "Công nghiệp", "Nghệ thuật", "Đời thường", "Trang nghiêm"]}
         />
       </div>
 
-      {/* Tìm kiếm nâng cao */}
       <CollapsibleSection label="Tìm kiếm nâng cao">
-        <div className="relative w-full">
-          <div className="w-full h-[46px] border border-black/50 rounded-full flex items-center px-4 gap-2 bg-white">
-            <svg className="shrink-0 w-5 h-5 opacity-50" fill="none" viewBox="0 0 18 18">
-              <path d={svgSearch} fill="black" />
-            </svg>
-            <input
-              type="text"
-              placeholder="Nhập từ khóa tìm kiếm"
-              className="flex-1 bg-transparent border-none outline-none text-base text-black/50"
-            />
-          </div>
+        <div className="w-full h-[46px] border border-black/50 rounded-full flex items-center px-4 gap-2 bg-white">
+          <svg className="shrink-0 w-5 h-5 opacity-50" fill="none" viewBox="0 0 18 18">
+            <path d={svgSearch} fill="black" />
+          </svg>
+          <input
+            type="text"
+            placeholder="Nhập từ khóa tìm kiếm"
+            className="flex-1 bg-transparent border-none outline-none text-base text-black/50"
+          />
         </div>
       </CollapsibleSection>
 
-      {/* Buttons */}
       <div className="flex gap-3 mt-2">
         <button
           onClick={handleSearch}
@@ -425,64 +368,6 @@ function Sidebar({
   );
 }
 
-// ─── Navbar ───────────────────────────────────────────────────────────────────
-function Navbar() {
-  return (
-    <header className="w-full bg-white border-b border-gray-100">
-      <div className="max-w-[1440px] mx-auto px-8 py-4 flex items-center gap-8">
-        {/* Logo */}
-        <div className="shrink-0 h-[60px] w-[180px] relative">
-          <img
-            src={imgLogo}
-            alt="Vietnam Film Production"
-            className="absolute inset-0 w-full h-full object-contain object-left pointer-events-none"
-          />
-        </div>
-
-        {/* Search bar */}
-        <div className="flex-1 max-w-[580px] relative">
-          <div className="w-full h-[52px] bg-[#ffac59]/50 rounded-full flex items-center px-5 gap-3">
-            <svg className="shrink-0 w-5 h-5" fill="none" viewBox="0 0 18 18">
-              <path d={svgSearch} fill="#49454F" />
-            </svg>
-            <input
-              type="text"
-              placeholder=""
-              className="flex-1 bg-transparent border-none outline-none text-base text-gray-700"
-            />
-          </div>
-        </div>
-
-        {/* Right side */}
-        <div className="ml-auto flex items-center gap-6 shrink-0">
-          <span className="font-bold text-black text-lg">EN/VI</span>
-          <span className="text-black text-lg cursor-pointer">Login</span>
-          <div className="w-[50px] h-[50px] relative rounded-full overflow-hidden">
-            <img
-              src={imgUserAvatar}
-              alt="User"
-              className="absolute inset-0 w-full h-full object-cover pointer-events-none"
-            />
-          </div>
-        </div>
-      </div>
-
-      {/* Nav links */}
-      <nav className="max-w-[1440px] mx-auto px-8 pb-3 flex gap-12">
-        {["Trang chủ", "Địa điểm", "Thủ tục/ Giấy phép", "Hỗ trợ thực địa", "Tin tức", "Tài chính"].map((item) => (
-          <a
-            key={item}
-            href="#"
-            className="font-extrabold text-[#fb7104] text-lg whitespace-nowrap hover:opacity-80 transition-opacity"
-          >
-            {item}
-          </a>
-        ))}
-      </nav>
-    </header>
-  );
-}
-
 // ─── Data ─────────────────────────────────────────────────────────────────────
 const defaultLocations = [
   { id: 1, title: "Hang Én", location: "Bố Trạch, Quảng Bình", verified: true, image: imgLocationDefault },
@@ -494,12 +379,12 @@ const defaultLocations = [
 ];
 
 const hanoiLocations = [
-  { id: 1, title: "Hồ Hoàn Kiếm",           location: "Hàng Trống, Hoàn Kiếm, Hà Nội",               verified: true, image: imgHoHoanKiem },
-  { id: 2, title: "Văn Miếu Quốc Tử Giám",  location: "58 Quốc Tử Giám, Văn Miếu, Đống Đa, Hà Nội", verified: true, image: imgVanMieu },
-  { id: 3, title: "Lăng Chủ tịch Hồ Chí Minh", location: "Số 2 Hùng Vương, Hà Nội",                  verified: true, image: imgLangHCM },
-  { id: 4, title: "Hoàng thành Thăng Long",  location: "Số 19C Hoàng Diệu, Hà Nội",                   verified: true, image: imgHoangThanhThangLong },
-  { id: 5, title: "Nhà thờ Lớn Hà Nội",     location: "Số 40 Nhà Chung, Hoàn Kiếm, Hà Nội",          verified: true, image: imgNhaThoLon },
-  { id: 6, title: "Chùa Thầy",              location: "Xã Quốc Oai, Hà Nội",                          verified: true, image: imgChuaThay },
+  { id: 1, title: "Hồ Hoàn Kiếm",              location: "Hàng Trống, Hoàn Kiếm, Hà Nội",               verified: true, image: imgHoHoanKiem },
+  { id: 2, title: "Văn Miếu Quốc Tử Giám",     location: "58 Quốc Tử Giám, Văn Miếu, Đống Đa, Hà Nội", verified: true, image: imgVanMieu },
+  { id: 3, title: "Lăng Chủ tịch Hồ Chí Minh", location: "Số 2 Hùng Vương, Hà Nội",                     verified: true, image: imgLangHCM },
+  { id: 4, title: "Hoàng thành Thăng Long",     location: "Số 19C Hoàng Diệu, Hà Nội",                   verified: true, image: imgHoangThanhThangLong },
+  { id: 5, title: "Nhà thờ Lớn Hà Nội",        location: "Số 40 Nhà Chung, Hoàn Kiếm, Hà Nội",          verified: true, image: imgNhaThoLon },
+  { id: 6, title: "Chùa Thầy",                 location: "Xã Quốc Oai, Hà Nội",                          verified: true, image: imgChuaThay },
 ];
 
 // ─── Province Panel ───────────────────────────────────────────────────────────
@@ -520,11 +405,8 @@ function ProvincePanel({ province }: { province: string }) {
   return (
     <div className="w-full mb-2">
       <p className="text-black/50 text-2xl mb-3">{data.title}</p>
-
       <div className="flex gap-6 items-start">
         <p className="flex-1 text-black text-sm leading-relaxed">{data.description}</p>
-
-        {/* PAI Chart */}
         <div className="shrink-0 flex flex-col items-center gap-1">
           <div className="relative w-[180px] h-[160px]">
             <span className="absolute top-0 left-1/2 -translate-x-1/2 text-black/50 text-[10px] text-center whitespace-nowrap">Hỗ trợ tài chính</span>
@@ -541,14 +423,13 @@ function ProvincePanel({ province }: { province: string }) {
           <p className="text-[#fb7104] text-xs font-bold text-center">Chỉ số thu hút đoàn làm phim (PAI)</p>
         </div>
       </div>
-
       <div className="w-full h-px bg-black/10 mt-4" />
     </div>
   );
 }
 
-// ─── App ──────────────────────────────────────────────────────────────────────
-export default function App() {
+// ─── Page ─────────────────────────────────────────────────────────────────────
+export default function DiaDiem() {
   const [selectedProvince, setSelectedProvince] = useState("");
 
   const activeLocations = selectedProvince === "Hà Nội" ? hanoiLocations : defaultLocations;
@@ -561,7 +442,6 @@ export default function App() {
       <main className="flex-1 max-w-[1440px] mx-auto w-full px-8 py-8 flex gap-10">
         <Sidebar selectedProvince={selectedProvince} onProvinceChange={setSelectedProvince} />
 
-        {/* Content */}
         <div className="flex-1 flex flex-col gap-6">
           <p className="text-black text-xl">
             <span className="font-semibold text-2xl">{resultCount}</span>{" "}
