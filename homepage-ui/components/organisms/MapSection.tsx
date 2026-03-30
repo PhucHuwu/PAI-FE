@@ -514,7 +514,7 @@ export const MapSection: React.FC = () => {
             <img
               alt="Vịnh Hạ Long"
               className="absolute h-[128.82%] left-0 max-w-none top-[-19.3%] w-full object-cover"
-              src={imgVinhHaLong}
+              src={imgVinhHaLong.src}
             />
           </div>
           <div className="absolute flex h-[732px] items-center justify-center left-[104px] top-px w-[1440px]">

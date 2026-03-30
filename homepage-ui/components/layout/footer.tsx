@@ -1,6 +1,6 @@
 import React from 'react';
 import svgPaths from "@/public/import/svg-ialo5pulhc";
-import imgLogo from "@/public/assets/logo.svg";
+import imgLogo from "@/public/assets/Logo1.svg";
 
 export const Footer: React.FC = () => {
   const scrollToTop = () => window.scrollTo({ top: 0, behavior: 'smooth' });
