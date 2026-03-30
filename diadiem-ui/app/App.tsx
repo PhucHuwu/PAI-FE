@@ -1,21 +1,27 @@
 import { useState, useRef, useEffect } from "react";
-import svgPaths from "../imports/svg-wpm40hznwg";
-import imgImage5 from "figma:asset/0158398dce39f3540d812ef24aa06f7b6e273c4a.png";
-import imgImage72 from "figma:asset/87f115d3a906d6e3c91d9fe61b5114c37f9d6d3c.png";
-import imgRectangle241 from "figma:asset/e1f7721aae66257262042cf2408fedab3c772654.png";
-// ─── Hà Nội location images ───────────────────────────────────────────────────
-import imgChuaThay from "figma:asset/b2d0be26f996232e8cecfba4308618aa63de0093.png";
-import imgHoangThanh from "figma:asset/a7c888230caac7398f7e1a959f694d922321a2f6.png";
-import imgVanMieu from "figma:asset/7e629568b3ccf670656d1468eba0312a88878f39.png";
-import imgNhaThoLon from "figma:asset/0b5d633a16399729ace02dad63c1d35085f3702d.png";
-import imgLangHCM from "figma:asset/b2554e35cfea31efd180b933bbd6d04e15ca66c6.png";
-import imgHoHoanKiem from "figma:asset/efe8146cd5363b0298df13077a3a5b75d5192d90.png";
-import imgPAIChart from "figma:asset/d009992d84f12d231b42afba6b5688b9baf0cfd7.png";
+import {
+  // ── images ──────────────────────────────────────────────────────────────────
+  imgUserAvatar,
+  imgLogo,
+  imgLocationDefault,
+  imgPAIChart,
+  imgHoHoanKiem,
+  imgVanMieu,
+  imgLangHCM,
+  imgHoangThanhThangLong,
+  imgNhaThoLon,
+  imgChuaThay,
+  // ── svg paths ───────────────────────────────────────────────────────────────
+  svgSearch,
+  svgCheckmark,
+  svgChevronUp,
+  svgChevronDown,
+  svgHeartOutline,
+  svgHeartFilled,
+  svgSpinner,
+} from "../assets";
 
-// ─── Loading Spinner SVG path ─────────────────────────────────────────────────
-const spinnerPath = "M8.8077 23.8333C8.68743 23.6247 8.5272 23.4418 8.3362 23.2951C8.14519 23.1484 7.92714 23.0408 7.69452 22.9785C7.46189 22.9161 7.21926 22.9002 6.9805 22.9317C6.74173 22.9632 6.51151 23.0414 6.303 23.1619L3.1269 24.9953C2.70598 25.2385 2.3989 25.639 2.27315 26.1086C2.1474 26.5782 2.21329 27.0785 2.45632 27.4995C2.69936 27.9206 3.09964 28.2279 3.56918 28.3538C4.03872 28.4798 4.53907 28.4142 4.96023 28.1714L8.13633 26.3381C8.5573 26.0947 8.86446 25.6943 8.99034 25.2246C9.11623 24.755 9.05053 24.2546 8.8077 23.8333ZM3.12688 11.6714L6.30298 13.5047C6.51153 13.6252 6.74179 13.7035 6.98059 13.735C7.2194 13.7665 7.46207 13.7507 7.69475 13.6884C7.92743 13.6261 8.14555 13.5185 8.33665 13.3719C8.52775 13.2253 8.68809 13.0424 8.80851 12.8338C8.92893 12.6252 9.00707 12.3949 9.03845 12.1561C9.06984 11.9173 9.05387 11.6746 8.99144 11.4419C8.92902 11.2093 8.82137 10.9912 8.67464 10.8002C8.52792 10.6092 8.34499 10.4489 8.13632 10.3286L4.96021 8.49528C4.53905 8.25246 4.0387 8.18683 3.56916 8.31282C3.09963 8.43881 2.69934 8.7461 2.45631 9.16714C2.21327 9.58817 2.14739 10.0885 2.27313 10.5581C2.39888 11.0277 2.70597 11.4281 3.12688 11.6714ZM7.33333 18.3333C7.33333 17.8471 7.14018 17.3808 6.79636 17.037C6.45255 16.6932 5.98623 16.5 5.5 16.5H1.83333C1.3471 16.5 0.880788 16.6932 0.536971 17.037C0.193154 17.3808 0 17.8471 0 18.3333C0 18.8196 0.193154 19.2859 0.536971 19.6297C0.880788 19.9735 1.3471 20.1667 1.83333 20.1667H5.5C5.98623 20.1667 6.45255 19.9735 6.79636 19.6297C7.14018 19.2859 7.33333 18.8196 7.33333 18.3333ZM27.859 12.8333C28.1022 13.2543 28.5027 13.5616 28.9724 13.6874C29.442 13.8133 29.9425 13.7476 30.3637 13.5047L33.5398 11.6714C33.7485 11.5511 33.9314 11.3908 34.0781 11.1998C34.2248 11.0088 34.3325 10.7907 34.3949 10.5581C34.4573 10.3254 34.4733 10.0827 34.4419 9.84393C34.4105 9.60511 34.3324 9.37481 34.212 9.1662C34.0916 8.95758 33.9312 8.77474 33.7401 8.62811C33.549 8.48148 33.3309 8.37394 33.0982 8.31164C32.8655 8.24934 32.6229 8.23348 32.3841 8.26499C32.1453 8.2965 31.915 8.37476 31.7065 8.49528L28.5304 10.3286C28.1094 10.5719 27.8022 10.9724 27.6763 11.442C27.5504 11.9117 27.6161 12.4121 27.859 12.8333V12.8333ZM23.8333 8.8077C24.2546 9.0506 24.755 9.11633 25.2246 8.99044C25.6943 8.86455 26.0948 8.55734 26.3381 8.13633L28.1714 4.96023C28.2919 4.75168 28.3702 4.52142 28.4017 4.28262C28.4332 4.04381 28.4173 3.80114 28.355 3.56846C28.2927 3.33579 28.1852 3.11767 28.0386 2.92656C27.8919 2.73546 27.7091 2.57512 27.5005 2.4547C27.2919 2.33428 27.0616 2.25615 26.8227 2.22476C26.5839 2.19337 26.3413 2.20935 26.1086 2.27177C25.876 2.33419 25.6579 2.44184 25.4669 2.58857C25.2758 2.73529 25.1156 2.91822 24.9953 3.1269L23.1619 6.303C22.9191 6.72424 22.8534 7.22465 22.9793 7.69429C23.1052 8.16392 23.4124 8.56439 23.8333 8.8077V8.8077ZM33.5398 24.9953L30.3637 23.1619C30.1551 23.0414 29.9249 22.9632 29.6861 22.9317C29.4473 22.9002 29.2046 22.916 28.9719 22.9783C28.7392 23.0406 28.5211 23.1482 28.33 23.2948C28.1389 23.4414 27.9786 23.6243 27.8582 23.8329C27.7377 24.0415 27.6596 24.2718 27.6282 24.5106C27.5968 24.7494 27.6128 24.9921 27.6752 25.2247C27.7376 25.4574 27.8453 25.6754 27.992 25.8665C28.1388 26.0575 28.3217 26.2177 28.5304 26.3381L31.7065 28.1714C32.1276 28.4142 32.628 28.4798 33.0975 28.3538C33.567 28.2279 33.9673 27.9206 34.2104 27.4995C34.4534 27.0785 34.5193 26.5782 34.3935 26.1086C34.2678 25.639 33.9607 25.2385 33.5398 24.9953V24.9953ZM26.3381 28.5303C26.2177 28.3217 26.0575 28.1387 25.8665 27.992C25.6754 27.8453 25.4574 27.7376 25.2247 27.6752C24.9921 27.6128 24.7494 27.5968 24.5106 27.6282C24.2718 27.6596 24.0415 27.7377 23.8329 27.8581C23.6243 27.9786 23.4414 28.1389 23.2948 28.33C23.1482 28.5211 23.0406 28.7392 22.9783 28.9719C22.916 29.2046 22.9002 29.4472 22.9317 29.6861C22.9632 29.9249 23.0414 30.1551 23.1619 30.3637L24.9953 33.5398C25.1156 33.7484 25.2758 33.9314 25.4669 34.0781C25.6579 34.2248 25.876 34.3325 26.1086 34.3949C26.3413 34.4573 26.5839 34.4733 26.8227 34.4419C27.0616 34.4105 27.2919 34.3324 27.5005 34.212C27.7091 34.0916 27.8919 33.9312 28.0386 33.7401C28.1852 33.549 28.2927 33.3309 28.355 33.0982C28.4173 32.8655 28.4332 32.6229 28.4017 32.384C28.3702 32.1452 28.2919 31.915 28.1714 31.7064L26.3381 28.5303ZM34.8333 16.5H31.1667C30.6804 16.5 30.2141 16.6932 29.8703 17.037C29.5265 17.3808 29.3333 17.8471 29.3333 18.3333C29.3333 18.8196 29.5265 19.2859 29.8703 19.6297C30.2141 19.9735 30.6804 20.1667 31.1667 20.1667H34.8333C35.3196 20.1667 35.7859 19.9735 36.1297 19.6297C36.4735 19.2859 36.6667 18.8196 36.6667 18.3333C36.6667 17.8471 36.4735 17.3808 36.1297 17.037C35.7859 16.6932 35.3196 16.5 34.8333 16.5ZM18.3333 29.3333C17.8471 29.3333 17.3808 29.5265 17.037 29.8703C16.6932 30.2141 16.5 30.6804 16.5 31.1667V34.8333C16.5 35.3196 16.6932 35.7859 17.037 36.1297C17.3808 36.4735 17.8471 36.6667 18.3333 36.6667C18.8196 36.6667 19.2859 36.4735 19.6297 36.1297C19.9735 35.7859 20.1667 35.3196 20.1667 34.8333V31.1667C20.1667 30.6804 19.9735 30.2141 19.6297 29.8703C19.2859 29.5265 18.8196 29.3333 18.3333 29.3333ZM12.8333 27.859C12.6248 27.7384 12.3946 27.6602 12.1558 27.6287C11.9171 27.5972 11.6744 27.6131 11.4418 27.6755C11.2092 27.7378 10.9911 27.8454 10.8001 27.9921C10.6091 28.1388 10.4489 28.3217 10.3286 28.5304L8.49528 31.7065C8.25246 32.1276 8.18683 32.628 8.31282 33.0975C8.43881 33.567 8.7461 33.9673 9.16714 34.2104C9.58817 34.4534 10.0885 34.5193 10.5581 34.3935C11.0277 34.2678 11.4281 33.9607 11.6714 33.5398L13.5047 30.3637C13.7476 29.9424 13.8132 29.442 13.6874 28.9724C13.5615 28.5027 13.2543 28.1023 12.8333 27.859V27.859ZM18.3333 0C17.8471 0 17.3808 0.193154 17.037 0.536971C16.6932 0.880788 16.5 1.3471 16.5 1.83333V5.5C16.5 5.98623 16.6932 6.45255 17.037 6.79636C17.3808 7.14018 17.8471 7.33333 18.3333 7.33333C18.8196 7.33333 19.2859 7.14018 19.6297 6.79636C19.9735 6.45255 20.1667 5.98623 20.1667 5.5V1.83333C20.1667 1.3471 19.9735 0.880788 19.6297 0.536971C19.2859 0.193154 18.8196 0 18.3333 0V0Z";
-
-// ─── Verified Badge ──────────────────────────────────────────────────────────
+// ─── Verified Badge ───────────────────────────────────────────────────────────
 function VerifiedBadge() {
   return (
     <div className="flex items-center gap-1.5 bg-[#e4e8e0] rounded-xl px-2.5 py-1 w-fit">
@@ -25,7 +31,7 @@ function VerifiedBadge() {
         </svg>
         <div className="absolute" style={{ inset: "28.81% 20.7% 28.6% 20.74%" }}>
           <svg className="absolute block size-full" fill="none" viewBox="0 0 11.7115 8.518">
-            <path d={svgPaths.p1f85000} fill="white" />
+            <path d={svgCheckmark} fill="white" />
           </svg>
         </div>
       </div>
@@ -34,7 +40,7 @@ function VerifiedBadge() {
   );
 }
 
-// ─── Location Card ───────────────────────────────────────────────────────────
+// ─── Location Card ────────────────────────────────────────────────────────────
 interface LocationCardProps {
   title: string;
   location: string;
@@ -61,16 +67,11 @@ function LocationCard({ title, location, verified = true, image }: LocationCardP
             className="cursor-pointer shrink-0"
             aria-label="Yêu thích"
           >
-            <svg
-              width="28"
-              height="26"
-              viewBox="0 0 33.3498 30.7748"
-              fill="none"
-            >
+            <svg width="28" height="26" viewBox="0 0 33.3498 30.7748" fill="none">
               {liked ? (
-                <path d="M30.2867 3.08179C28.5172 1.3118 26.1712 0.235663 23.6754 0.0490879C21.1795 -0.137487 18.6996 0.577889 16.6867 2.06512C14.5661 0.487848 11.9266 -0.227362 9.29986 0.063515C6.67307 0.354392 4.25406 1.62975 2.52995 3.63276C0.805835 5.63577 -0.0953057 8.21765 0.00799234 10.8585C0.11129 13.4993 1.21135 16.0029 3.08666 17.8651L15.5033 30.2818C15.6583 30.438 15.8426 30.562 16.0457 30.6466C16.2488 30.7312 16.4666 30.7748 16.6867 30.7748C16.9067 30.7748 17.1245 30.7312 17.3276 30.6466C17.5307 30.562 17.7151 30.438 17.87 30.2818L30.2867 17.8651C31.2577 16.8947 32.0281 15.7424 32.5537 14.4741C33.0793 13.2058 33.3498 11.8463 33.3498 10.4735C33.3498 9.10057 33.0793 7.74114 32.5537 6.47284C32.0281 5.20455 31.2577 4.05225 30.2867 3.08179Z" fill="#BA252E" />
+                <path d={svgHeartFilled} fill="#BA252E" />
               ) : (
-                <path d={svgPaths.p3962df00} fill="black" />
+                <path d={svgHeartOutline} fill="black" />
               )}
             </svg>
           </button>
@@ -82,14 +83,14 @@ function LocationCard({ title, location, verified = true, image }: LocationCardP
   );
 }
 
-// ─── Dropdown ─────────────────────────────────────────────────────────────────
+// ─── Dropdown (plain, non-interactive) ───────────────────────────────────────
 function Dropdown({ label }: { label: string }) {
   return (
     <div className="relative w-full border border-black rounded-xl h-[52px] flex items-center px-4 cursor-pointer bg-white">
-      <span className="flex-1 text-black text-base font-medium">{label}</span>
+      <span className="flex-1 text-black/50 text-base font-medium">{label}</span>
       <div className="shrink-0 w-5 h-5 relative overflow-hidden">
         <svg className="absolute block size-full" fill="none" viewBox="0 0 10.5416 6.24659">
-          <path d={svgPaths.p3c3ab600} fill="black" />
+          <path d={svgChevronDown} fill="black" />
         </svg>
       </div>
     </div>
@@ -141,7 +142,7 @@ function ProvinceDropdown({ value, onChange }: ProvinceDropdownProps) {
         </span>
         <div className={`shrink-0 w-5 h-5 relative overflow-hidden transition-transform ${open ? "rotate-180" : ""}`}>
           <svg className="absolute block size-full" fill="none" viewBox="0 0 10.5416 6.24659">
-            <path d={svgPaths.p3c3ab600} fill="black" />
+            <path d={svgChevronDown} fill="black" />
           </svg>
         </div>
       </button>
@@ -192,7 +193,7 @@ function FilterRow({ label, defaultOpen = false, subOptions }: FilterRowProps) {
         <span className="font-semibold text-black text-base">▽ {label}</span>
         <div className={`w-5 h-5 relative overflow-hidden transition-transform ${open ? "" : "rotate-180"}`}>
           <svg className="absolute block size-full" fill="none" viewBox="0 0 10.5175 6.24659">
-            <path d={svgPaths.p2f532800} fill="black" />
+            <path d={svgChevronUp} fill="black" />
           </svg>
         </div>
       </div>
@@ -246,7 +247,7 @@ function CollapsibleSection({ label, children }: CollapsibleSectionProps) {
         <span className="font-semibold text-black text-lg">{label}</span>
         <div className={`w-5 h-5 relative overflow-hidden transition-transform ${open ? "" : "rotate-180"}`}>
           <svg className="absolute block size-full" fill="none" viewBox="0 0 10.5175 6.24659">
-            <path d={svgPaths.p2f532800} fill="black" />
+            <path d={svgChevronUp} fill="black" />
           </svg>
         </div>
       </div>
@@ -261,7 +262,13 @@ function CollapsibleSection({ label, children }: CollapsibleSectionProps) {
 }
 
 // ─── Sidebar ──────────────────────────────────────────────────────────────────
-function Sidebar({ selectedProvince, onProvinceChange }: { selectedProvince: string; onProvinceChange: (v: string) => void }) {
+function Sidebar({
+  selectedProvince,
+  onProvinceChange,
+}: {
+  selectedProvince: string;
+  onProvinceChange: (v: string) => void;
+}) {
   const [isLoading, setIsLoading] = useState(false);
 
   const handleSearch = () => {
@@ -313,7 +320,7 @@ function Sidebar({ selectedProvince, onProvinceChange }: { selectedProvince: str
           ]}
         />
         <FilterRow
-          label="không gian công cộng"
+          label="Không gian công cộng"
           subOptions={[
             "Phố xá / Hẻm",
             "Quảng trường",
@@ -373,7 +380,7 @@ function Sidebar({ selectedProvince, onProvinceChange }: { selectedProvince: str
         <div className="relative w-full">
           <div className="w-full h-[46px] border border-black/50 rounded-full flex items-center px-4 gap-2 bg-white">
             <svg className="shrink-0 w-5 h-5 opacity-50" fill="none" viewBox="0 0 18 18">
-              <path d={svgPaths.p16b4a380} fill="black" />
+              <path d={svgSearch} fill="black" />
             </svg>
             <input
               type="text"
@@ -390,9 +397,9 @@ function Sidebar({ selectedProvince, onProvinceChange }: { selectedProvince: str
           onClick={handleSearch}
           disabled={isLoading}
           className={`
-            group flex-1 h-[38px] rounded-[10px] font-semibold text-base
+            flex-1 h-[38px] rounded-[10px] font-semibold text-base
             shadow-[0px_4px_4px_0px_rgba(0,0,0,0.25)] cursor-pointer
-            relative overflow-hidden transition-all duration-200
+            transition-all duration-200
             ${isLoading
               ? "bg-[#c8c8c8] text-[#9e9e9e] cursor-not-allowed"
               : "bg-gradient-to-b from-[#ff8423] to-[#e46400] border border-[#fb7104] text-white hover:from-[#ffdd32] hover:to-[rgba(255,221,50,0.5)] hover:text-[#ba252e] hover:border-[#ffdd32]"
@@ -401,12 +408,8 @@ function Sidebar({ selectedProvince, onProvinceChange }: { selectedProvince: str
         >
           {isLoading ? (
             <span className="flex items-center justify-center gap-2">
-              <svg
-                className="animate-spin w-4 h-4 shrink-0"
-                viewBox="0 0 36.6667 36.6667"
-                fill="none"
-              >
-                <path d={spinnerPath} fill="#9e9e9e" />
+              <svg className="animate-spin w-4 h-4 shrink-0" viewBox="0 0 36.6667 36.6667" fill="none">
+                <path d={svgSpinner} fill="#9e9e9e" />
               </svg>
               <span>Tìm kiếm</span>
             </span>
@@ -430,7 +433,7 @@ function Navbar() {
         {/* Logo */}
         <div className="shrink-0 h-[60px] w-[180px] relative">
           <img
-            src={imgImage72}
+            src={imgLogo}
             alt="Vietnam Film Production"
             className="absolute inset-0 w-full h-full object-contain object-left pointer-events-none"
           />
@@ -438,12 +441,10 @@ function Navbar() {
 
         {/* Search bar */}
         <div className="flex-1 max-w-[580px] relative">
-          <div className="w-full h-[52px] bg-[#ffac59] bg-opacity-50 rounded-full flex items-center px-5 gap-3">
-            <div className="shrink-0 w-5 h-5 relative overflow-hidden">
-              <svg className="absolute block size-full" fill="none" viewBox="0 0 18 18">
-                <path d={svgPaths.p16b4a380} fill="#49454F" />
-              </svg>
-            </div>
+          <div className="w-full h-[52px] bg-[#ffac59]/50 rounded-full flex items-center px-5 gap-3">
+            <svg className="shrink-0 w-5 h-5" fill="none" viewBox="0 0 18 18">
+              <path d={svgSearch} fill="#49454F" />
+            </svg>
             <input
               type="text"
               placeholder=""
@@ -458,7 +459,7 @@ function Navbar() {
           <span className="text-black text-lg cursor-pointer">Login</span>
           <div className="w-[50px] h-[50px] relative rounded-full overflow-hidden">
             <img
-              src={imgImage5}
+              src={imgUserAvatar}
               alt="User"
               className="absolute inset-0 w-full h-full object-cover pointer-events-none"
             />
@@ -482,31 +483,32 @@ function Navbar() {
   );
 }
 
-// ─── Main Content ─────────────────────────────────────────────────────────────
-const locations = [
-  { id: 1, title: "Hang Én", location: "Bố Trạch, Quảng Bình", verified: true, image: imgRectangle241 },
-  { id: 2, title: "Hang Én", location: "Bố Trạch, Quảng Bình", verified: true, image: imgRectangle241 },
-  { id: 3, title: "Hang Én", location: "Bố Trạch, Quảng Bình", verified: true, image: imgRectangle241 },
-  { id: 4, title: "Hang Én", location: "Bố Trạch, Quảng Bình", verified: true, image: imgRectangle241 },
-  { id: 5, title: "Hang Én", location: "Bố Trạch, Quảng Bình", verified: true, image: imgRectangle241 },
-  { id: 6, title: "Hang Én", location: "Bố Trạch, Quảng Bình", verified: true, image: imgRectangle241 },
+// ─── Data ─────────────────────────────────────────────────────────────────────
+const defaultLocations = [
+  { id: 1, title: "Hang Én", location: "Bố Trạch, Quảng Bình", verified: true, image: imgLocationDefault },
+  { id: 2, title: "Hang Én", location: "Bố Trạch, Quảng Bình", verified: true, image: imgLocationDefault },
+  { id: 3, title: "Hang Én", location: "Bố Trạch, Quảng Bình", verified: true, image: imgLocationDefault },
+  { id: 4, title: "Hang Én", location: "Bố Trạch, Quảng Bình", verified: true, image: imgLocationDefault },
+  { id: 5, title: "Hang Én", location: "Bố Trạch, Quảng Bình", verified: true, image: imgLocationDefault },
+  { id: 6, title: "Hang Én", location: "Bố Trạch, Quảng Bình", verified: true, image: imgLocationDefault },
 ];
 
 const hanoiLocations = [
-  { id: 1, title: "Hồ Hoàn Kiếm", location: "Hàng Trống, Hoàn Kiếm, Hà Nội", verified: true, image: imgHoHoanKiem },
-  { id: 2, title: "Văn Miếu Quốc Tử Giám", location: "58 Quốc Tử Giám, Văn Miếu, Đống Đa, Hà Nội", verified: true, image: imgVanMieu },
-  { id: 3, title: "Lăng Chủ tịch Hồ Chí Minh", location: "Số 2 Hùng Vương, Hà Nội", verified: true, image: imgLangHCM },
-  { id: 4, title: "Hoàng thành Thăng Long", location: "Số 19C Hoàng Diệu, Hà Nội", verified: true, image: imgHoangThanh },
-  { id: 5, title: "Nhà thờ Lớn Hà Nội", location: "Số 40 Nhà Chung, Hoàn Kiếm, Hà Nội", verified: true, image: imgNhaThoLon },
-  { id: 6, title: "Chùa Thầy", location: "Xã Quốc Oai, Hà Nội", verified: true, image: imgChuaThay },
+  { id: 1, title: "Hồ Hoàn Kiếm",           location: "Hàng Trống, Hoàn Kiếm, Hà Nội",               verified: true, image: imgHoHoanKiem },
+  { id: 2, title: "Văn Miếu Quốc Tử Giám",  location: "58 Quốc Tử Giám, Văn Miếu, Đống Đa, Hà Nội", verified: true, image: imgVanMieu },
+  { id: 3, title: "Lăng Chủ tịch Hồ Chí Minh", location: "Số 2 Hùng Vương, Hà Nội",                  verified: true, image: imgLangHCM },
+  { id: 4, title: "Hoàng thành Thăng Long",  location: "Số 19C Hoàng Diệu, Hà Nội",                   verified: true, image: imgHoangThanhThangLong },
+  { id: 5, title: "Nhà thờ Lớn Hà Nội",     location: "Số 40 Nhà Chung, Hoàn Kiếm, Hà Nội",          verified: true, image: imgNhaThoLon },
+  { id: 6, title: "Chùa Thầy",              location: "Xã Quốc Oai, Hà Nội",                          verified: true, image: imgChuaThay },
 ];
 
-// ─── Province Panel ────────────────────────────────────────────────────────────
+// ─── Province Panel ───────────────────────────────────────────────────────────
 function ProvincePanel({ province }: { province: string }) {
   const provinceData: Record<string, { title: string; description: string }> = {
     "Hà Nội": {
       title: "Thành phố Hà Nội",
-      description: "Hà Nội, thủ đô hơn 1000 năm văn hiến của Việt Nam, là trung tâm chính trị, văn hóa và kinh tế quan trọng bậc nhất. Nằm ở trung tâm đồng bằng sông Hồng, thành phố nổi tiếng với kiến trúc cổ kính, văn hóa lâu đời, ẩm thực tinh tế và là điểm đến du lịch đặc sắc, kết hợp hài hòa giữa nét cổ điển và hiện đại.",
+      description:
+        "Hà Nội, thủ đô hơn 1000 năm văn hiến của Việt Nam, là trung tâm chính trị, văn hóa và kinh tế quan trọng bậc nhất. Nằm ở trung tâm đồng bằng sông Hồng, thành phố nổi tiếng với kiến trúc cổ kính, văn hóa lâu đời, ẩm thực tinh tế và là điểm đến du lịch đặc sắc, kết hợp hài hòa giữa nét cổ điển và hiện đại.",
     },
   };
 
@@ -517,24 +519,19 @@ function ProvincePanel({ province }: { province: string }) {
 
   return (
     <div className="w-full mb-2">
-      {/* Title row */}
       <p className="text-black/50 text-2xl mb-3">{data.title}</p>
 
-      {/* Info + chart row */}
       <div className="flex gap-6 items-start">
-        {/* Description */}
         <p className="flex-1 text-black text-sm leading-relaxed">{data.description}</p>
 
         {/* PAI Chart */}
         <div className="shrink-0 flex flex-col items-center gap-1">
           <div className="relative w-[180px] h-[160px]">
-            {/* Axis labels */}
             <span className="absolute top-0 left-1/2 -translate-x-1/2 text-black/50 text-[10px] text-center whitespace-nowrap">Hỗ trợ tài chính</span>
-            <span className="absolute top-[36px] right-0 text-black/50 text-[10px] text-center whitespace-nowrap">Hỗ trợ thông tin</span>
+            <span className="absolute top-[36px] right-0 text-black/50 text-[10px] whitespace-nowrap">Hỗ trợ thông tin</span>
             <span className="absolute bottom-[28px] left-0 text-black/50 text-[10px] whitespace-nowrap">Hạ tầng sẵn có</span>
             <span className="absolute bottom-0 left-[22px] text-black/50 text-[10px] whitespace-nowrap">Hỗ trợ thủ tục pháp lý</span>
             <span className="absolute bottom-0 right-0 text-black/50 text-[10px] whitespace-nowrap">Hỗ trợ tại thực địa</span>
-            {/* Chart image centered */}
             <img
               src={imgPAIChart}
               alt="PAI Chart"
@@ -554,7 +551,7 @@ function ProvincePanel({ province }: { province: string }) {
 export default function App() {
   const [selectedProvince, setSelectedProvince] = useState("");
 
-  const activeLocations = selectedProvince === "Hà Nội" ? hanoiLocations : locations;
+  const activeLocations = selectedProvince === "Hà Nội" ? hanoiLocations : defaultLocations;
   const resultCount = selectedProvince === "Hà Nội" ? "6" : "1,245";
 
   return (
