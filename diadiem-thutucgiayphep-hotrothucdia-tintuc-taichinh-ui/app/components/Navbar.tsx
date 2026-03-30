@@ -22,8 +22,22 @@ const NAV_LINKS = [
       { label: "Kết nối cộng đồng", path: "/ho-tro-thuc-dia/ket-noi-cong-dong" },
     ],
   },
-  { label: "Tin tức",             path: "/tin-tuc",            children: null },
-  { label: "Tài chính",           path: "/tai-chinh",          children: null },
+  { label: "Tin tức",
+    path: "/tin-tuc",
+    children: [
+      { label: "Tin tức",   path: "/tin-tuc/tin-tuc" },
+      { label: "Chính sách", path: "/tin-tuc/chinh-sach" },
+      { label: "Sự kiện",    path: "/tin-tuc/su-kien" },
+    ],
+  },
+  { label: "Tài chính",
+    path: "/tai-chinh",
+    children: [
+      { label: "Chính sách & Ưu đãi",      path: "/tai-chinh/chinh-sach-uu-dai" },
+      { label: "Chi phí dịch vụ phổ biến", path: "/tai-chinh/chi-phi-dich-vu" },
+      { label: "Quỹ & Nguồn lực hỗ trợ",   path: "/tai-chinh/quy-nguon-luc" },
+    ],
+  },
 ];
 
 export function Navbar() {
