@@ -1,118 +1,142 @@
 import React from 'react';
-import imgBackground from "@/public/assets/danh-lam-thang-canh-viet-nam.png";
-import imgLogo from "@/public/assets/Logo.png";
-import svgPaths from "@/public/import/svg-ccxlz9nufo";
-
-const NAV_LINKS = [
-  { label: 'Khám phá', href: '#explore' },
-  { label: 'Sản xuất', href: '#production' },
-  { label: 'Khám phá', href: '#discover' },
-  { label: 'Liên hệ', href: '#contact' },
-];
+import svgPaths from "@/public/import/svg-ialo5pulhc";
+import imgLogo from "@/public/assets/logo.svg";
 
 export const Footer: React.FC = () => {
+  const scrollToTop = () => window.scrollTo({ top: 0, behavior: 'smooth' });
+
   return (
-    <footer className="relative w-full overflow-hidden">
-      {/* Background Image */}
-      <div className="relative w-full h-[500px] md:h-[600px] lg:h-[700px]">
-        <img
-          src={imgBackground.src}
-          alt="Danh lam thắng cảnh Việt Nam"
-          className="absolute inset-0 w-full h-full object-cover object-center pointer-events-none"
-        />
+    <footer className="w-full bg-[#fff1e4]">
+      {/* Main content area */}
+      <div className="max-w-[1440px] mx-auto px-[134px] py-10">
+        <div className="flex flex-col gap-6">
 
-        {/* Semi-transparent white content panel — sits at the bottom ~44% */}
-        <div className="absolute bottom-0 left-0 right-0 bg-[rgba(255,255,255,0.82)] pt-10 pb-8 px-8 md:px-16">
-          <div className="max-w-[1440px] mx-auto flex flex-col gap-6">
+          {/* Logo */}
+          <div style={{ width: 342, height: 118 }} className="shrink-0">
+            <img
+              src={imgLogo.src}
+              alt="Vietnam Film Production"
+              className="w-full h-full object-contain object-left"
+            />
+          </div>
 
-            {/* Top Row: Logo + Nav links */}
-            <div className="flex flex-col md:flex-row items-start md:items-center gap-6 md:gap-0 justify-between">
-              {/* Logo */}
-              <div className="w-[220px] md:w-[280px] shrink-0">
-                <img
-                  src={imgLogo.src}
-                  alt="Việt Nam PAI - Production Attraction Index"
-                  className="w-full h-auto object-contain"
-                />
-              </div>
-
-              {/* Navigation Links */}
-              <nav className="flex flex-wrap gap-8 md:gap-12 items-center">
-                {NAV_LINKS.map((link, i) => (
-                  <a
-                    key={i}
-                    href={link.href}
-                    className="font-bold text-[#414853] text-[22px] md:text-[24px] hover:text-[#FFAC59] transition-colors whitespace-nowrap"
-                  >
-                    {link.label}
-                  </a>
-                ))}
-              </nav>
+          {/* Info row */}
+          <div className="flex flex-col lg:flex-row justify-between gap-8">
+            {/* Left: VFDA info */}
+            <div className="flex flex-col gap-1">
+              <p className="font-semibold text-[#414853] text-[16px]">
+                VIETNAM FILM DEVELOPMENT ASSOCIATION (VFDA)
+              </p>
+              <p className="font-normal text-[#385571] text-[16px]">
+                Address: No.32 Hao Nam Street, Dong Da District, Ha Noi, Vietnam
+              </p>
+              <p className="text-[#414853] text-[16px]">
+                <span className="font-semibold text-[#fb7104]">Email:</span>
+                <span className="font-semibold text-[#385571]"> officevfda@gmail.com</span>
+              </p>
+              <p className="text-[#414853] text-[16px]">
+                <span className="font-semibold text-[#fb7104]">Website:</span>
+                <span className="font-semibold text-[#385571]"> https://vfda.vn/en/</span>
+              </p>
             </div>
 
-            {/* Bottom Row: Sponsor text + Social icons */}
-            <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
-              {/* Sponsor text */}
-              <p className="text-[#414853] text-[16px] leading-relaxed">
+            {/* Right: Bảo trợ */}
+            <div className="flex items-end">
+              <p className="font-normal text-[#414853] text-[16px] leading-relaxed text-right">
                 Được bảo trợ bởi Học viện Công nghệ Bưu chính<br />
                 Viễn thông và Hiệp hội Xúc tiến Điện ảnh Việt Nam
               </p>
-
-              {/* Social Media Icons */}
-              <div className="flex items-center gap-4">
-                {/* Facebook */}
-                <a
-                  href="https://facebook.com"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center justify-center w-[51px] h-[51px] hover:opacity-70 transition-opacity"
-                  aria-label="Facebook"
-                >
-                  <svg fill="none" viewBox="0 0 22.0787 42.5001" className="h-[34px] w-auto">
-                    <path d={svgPaths.pa65b6f0} fill="#414853" />
-                  </svg>
-                </a>
-
-                {/* Mail */}
-                <a
-                  href="mailto:contact@vietnampai.vn"
-                  className="flex items-center justify-center w-[65px] h-[65px] hover:opacity-70 transition-opacity"
-                  aria-label="Email"
-                >
-                  <svg fill="none" viewBox="0 0 54.1667 43.3333" className="h-[36px] w-auto">
-                    <path d={svgPaths.p3cd0ea00} fill="#414853" />
-                  </svg>
-                </a>
-
-                {/* Instagram */}
-                <a
-                  href="https://instagram.com"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center justify-center w-[51px] h-[51px] hover:opacity-70 transition-opacity"
-                  aria-label="Instagram"
-                >
-                  <svg fill="none" viewBox="0 0 42.5 42.5" className="h-[34px] w-auto">
-                    <path d={svgPaths.pd07dcf0} fill="#414853" />
-                  </svg>
-                </a>
-
-                {/* YouTube */}
-                <a
-                  href="https://youtube.com"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center justify-center w-[54px] h-[54px] hover:opacity-70 transition-opacity"
-                  aria-label="YouTube"
-                >
-                  <svg fill="none" viewBox="0 0 49.5312 34.8048" className="h-[28px] w-auto">
-                    <path d={svgPaths.p160b0100} fill="#414853" />
-                  </svg>
-                </a>
-              </div>
             </div>
-
           </div>
+        </div>
+      </div>
+
+      {/* Orange bar */}
+      <div className="w-full bg-[#fb7104] h-[42px]">
+        <div className="max-w-[1440px] mx-auto px-[134px] h-full flex items-center justify-between">
+          {/* Left nav links */}
+          <div className="flex items-center gap-8">
+            <button
+              onClick={scrollToTop}
+              className="font-semibold text-[#414853] text-[16px] hover:text-white transition-colors whitespace-nowrap"
+            >
+              Quay lại đầu trang
+            </button>
+            <a
+              href="#privacy"
+              className="font-semibold text-[#414853] text-[16px] hover:text-white transition-colors whitespace-nowrap"
+            >
+              Quyền riêng tư
+            </a>
+            <a
+              href="#terms"
+              className="font-semibold text-[#414853] text-[16px] hover:text-white transition-colors whitespace-nowrap"
+            >
+              Điều khoản sử dụng
+            </a>
+          </div>
+
+          {/* Right: social icons */}
+          <div className="flex items-center gap-4">
+            {/* Facebook */}
+            <a
+              href="https://facebook.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Facebook"
+              className="hover:opacity-70 transition-opacity"
+            >
+              <svg fill="none" viewBox="0 0 11.2558 21.6667" className="h-[22px] w-auto">
+                <path d={svgPaths.p39515580} fill="#414853" />
+              </svg>
+            </a>
+
+            {/* Email */}
+            <a
+              href="mailto:officevfda@gmail.com"
+              aria-label="Email"
+              className="hover:opacity-70 transition-opacity"
+            >
+              <svg fill="none" viewBox="0 0 27.5 21.3333" className="h-[22px] w-auto">
+                <path d={svgPaths.p1f408e80} fill="#414853" />
+              </svg>
+            </a>
+
+            {/* Instagram */}
+            <a
+              href="https://instagram.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Instagram"
+              className="hover:opacity-70 transition-opacity"
+            >
+              <svg fill="none" viewBox="0 0 20.8333 21.6667" className="h-[22px] w-auto">
+                <path d={svgPaths.p31d1a480} fill="#414853" />
+              </svg>
+            </a>
+
+            {/* YouTube */}
+            <a
+              href="https://youtube.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="YouTube"
+              className="hover:opacity-70 transition-opacity"
+            >
+              <svg fill="none" viewBox="0 0 24.7656 18.0469" className="h-[20px] w-auto">
+                <path d={svgPaths.p125c3a00} fill="#414853" />
+              </svg>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      {/* Copyright */}
+      <div className="w-full bg-[#fff1e4]">
+        <div className="max-w-[1440px] mx-auto px-[134px] py-3">
+          <p className="font-normal text-[15px] text-black">
+            Copyright © 2026 Ha Noi, Vietnam
+          </p>
         </div>
       </div>
     </footer>

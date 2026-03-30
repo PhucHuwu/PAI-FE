@@ -6,164 +6,208 @@ import trendingImg from '@/public/images/locations/hoi-an.jpg'
 import financialImg from '@/public/images/locations/son-doong.jpg'
 import backgroundImg from '@/public/assets/anh-ruong-bac-thang.png'
 
-// --- MOCK DATA ---
-const INFRASTRUCTURE_RANKINGS = Array(12).fill({ rank: 1, name: 'QUAN TUAN ANH', score: 91, avatar: infrastructureImg }).map((item, i) => ({ ...item, rank: i + 1, score: 100 - i }));
-const TRENDING_LOCATIONS = Array(12).fill({ rank: 1, name: 'Bảo tàng chứng tích Chiến tranh', city: 'TP Hồ Chí Minh', score: 4.980, avatar: trendingImg }).map((item, i) => ({ ...item, rank: i + 1, score: (4.980 - i * 0.1).toFixed(3) }));
-const FINANCIAL_SUPPORT_RANKINGS = Array(12).fill({ rank: 1, name: 'TP Hồ Chí Minh', score: 9.893, avatar: financialImg }).map((item, i) => ({ ...item, rank: i + 1, score: (9.893 - i * 0.1).toFixed(3) }));
-
-// --- TYPES ---
-type BoardType = 'infrastructure' | 'trending' | 'financial' | null;
-
-interface BoardConfig {
-  title: string;
-  col1: string;
-  col2: string;
-  data: any[];
-  type: BoardType;
-  isCenter?: boolean;
+// ─── Shared data types ──────────────────────────────────────────────────────
+interface RankingItem {
+  rank: number;
+  name: string;
+  city: string;
+  score: number | string;
 }
 
-const boards: BoardConfig[] = [
-    { title: 'CƠ SỞ HẠ TẦNG TỐT NHẤT', col1: 'Người tham gia', col2: 'Lượt check-in', data: INFRASTRUCTURE_RANKINGS, type: 'infrastructure' },
-    { title: 'ĐỊA ĐIỂM TOP TRENDING', col1: 'Tên địa điểm', col2: 'Lượt check-in', data: TRENDING_LOCATIONS, type: 'trending', isCenter: true },
-    { title: 'MỨC HỖ TRỢ TÀI CHÍNH TỐT NHẤT', col1: 'Tên địa điểm', col2: 'Chỉ số', data: FINANCIAL_SUPPORT_RANKINGS, type: 'financial' },
-  ];
+// ─── Mock data for 5 leaderboards ───────────────────────────────────────────
 
-export const LeaderboardSection: React.FC = () => {
-  const [activeModal, setActiveModal] = useState<BoardType>(null);
+const TRENDING_LOCATIONS: RankingItem[] = [
+  { rank: 1,  name: 'Bảo tàng Chứng tích Chiến tranh', city: 'TP. Hồ Chí Minh', score: '9.823' },
+  { rank: 2,  name: 'Phố cổ Hội An',                   city: 'Quảng Nam',        score: '9.810' },
+  { rank: 3,  name: 'Vịnh Hạ Long',                    city: 'Quảng Ninh',       score: '9.795' },
+  { rank: 4,  name: 'Lăng Chủ tịch Hồ Chí Minh',      city: 'Hà Nội',           score: '9.781' },
+  { rank: 5,  name: 'Phố đi bộ Nguyễn Huệ',            city: 'TP. Hồ Chí Minh', score: '9.762' },
+  { rank: 6,  name: 'Cầu Rồng',                        city: 'Đà Nẵng',          score: '9.744' },
+  { rank: 7,  name: 'Bà Nà Hills',                     city: 'Đà Nẵng',          score: '9.731' },
+  { rank: 8,  name: 'Hoàng thành Thăng Long',           city: 'Hà Nội',           score: '9.715' },
+  { rank: 9,  name: 'Thung lũng tình yêu',             city: 'Lâm Đồng',         score: '9.700' },
+  { rank: 10, name: 'Mỹ Sơn Thánh địa',                city: 'Quảng Nam',        score: '9.688' },
+  { rank: 11, name: 'Vườn quốc gia Phong Nha',         city: 'Quảng Bình',       score: '9.672' },
+  { rank: 12, name: 'Hồ Gươm',                         city: 'Hà Nội',           score: '9.655' },
+  { rank: 13, name: 'Bãi biển Mỹ Khê',                 city: 'Đà Nẵng',          score: '9.641' },
+  { rank: 14, name: 'Cung đường đèo Hải Vân',          city: 'Thừa Thiên Huế',   score: '9.623' },
+  { rank: 15, name: 'Đảo Phú Quốc',                    city: 'Kiên Giang',       score: '9.607' },
+];
 
-  useEffect(() => {
-    if (activeModal) {
-      document.body.style.overflow = 'hidden';
-    } else {
-      document.body.style.overflow = 'unset';
-    }
-    return () => { document.body.style.overflow = 'unset'; }
-  }, [activeModal]);
+const INFRASTRUCTURE_RANKINGS: RankingItem[] = [
+  { rank: 1,  name: 'Hà Nội',            city: 'Miền Bắc',  score: '9.850' },
+  { rank: 2,  name: 'TP. Hồ Chí Minh',  city: 'Miền Nam',  score: '9.823' },
+  { rank: 3,  name: 'Đà Nẵng',           city: 'Miền Trung',score: '9.790' },
+  { rank: 4,  name: 'Hải Phòng',         city: 'Miền Bắc',  score: '9.764' },
+  { rank: 5,  name: 'Cần Thơ',           city: 'Miền Nam',  score: '9.741' },
+  { rank: 6,  name: 'Quảng Ninh',        city: 'Miền Bắc',  score: '9.720' },
+  { rank: 7,  name: 'Bình Dương',        city: 'Miền Nam',  score: '9.698' },
+  { rank: 8,  name: 'Đồng Nai',          city: 'Miền Nam',  score: '9.672' },
+  { rank: 9,  name: 'Lâm Đồng',          city: 'Tây Nguyên',score: '9.651' },
+  { rank: 10, name: 'Khánh Hòa',         city: 'Miền Trung',score: '9.630' },
+  { rank: 11, name: 'Thừa Thiên Huế',    city: 'Miền Trung',score: '9.608' },
+  { rank: 12, name: 'Bắc Ninh',          city: 'Miền Bắc',  score: '9.584' },
+  { rank: 13, name: 'Nghệ An',           city: 'Miền Trung',score: '9.561' },
+  { rank: 14, name: 'Thanh Hóa',         city: 'Miền Trung',score: '9.542' },
+  { rank: 15, name: 'Gia Lai',           city: 'Tây Nguyên',score: '9.518' },
+];
 
-  // Component render từng dòng dữ liệu (Dùng chung cho cả Card và Modal)
-  const renderRow = (item: any, isModal = false) => {
-    const textColor = isModal ? 'text-black' : 'text-white';
-    const subTextColor = isModal ? 'text-gray-500' : 'text-[#e7c5c5]';
-    
-    return (
-      <div key={item.rank} className={`flex items-start gap-2 sm:gap-3 ${isModal ? 'py-2 sm:py-3 border-b border-gray-100 last:border-0' : 'py-1'}`}>
-        {/* RESPONSIVE: Cỡ chữ rank tự thu nhỏ trên mobile (text-[13px] -> sm:text-[14px]) */}
-        <span className={`font-['Inter',sans-serif] font-black text-[13px] sm:text-[14px] ${textColor} w-[15px] pt-1.5 sm:pt-2`}>
-          {item.rank}
-        </span>
-        {/* RESPONSIVE: Ảnh avatar nhỏ lại chút xíu trên mobile */}
-        <img src={item.avatar.src} alt="" className="w-[30px] h-[30px] sm:w-[35px] sm:h-[35px] rounded-full mt-1 object-cover shrink-0" />
-        <div className="flex-1 overflow-hidden">
-          <p className={`font-['Inter',sans-serif] font-black text-[13px] sm:text-[14px] ${textColor} overflow-hidden text-ellipsis whitespace-nowrap pt-1`}>
-            {item.name}
-          </p>
-          {item.city && (
-            <p className={`font-['Inter',sans-serif] font-semibold text-[10px] sm:text-[11px] ${subTextColor} overflow-hidden text-ellipsis whitespace-nowrap`}>
-              {item.city}
-            </p>
-          )}
-        </div>
-        <span className={`font-['Inter',sans-serif] font-black text-[13px] sm:text-[14px] ${textColor} pt-1.5 sm:pt-2 shrink-0`}>
-          {item.score}
-        </span>
-      </div>
-    );
-  };
+const FINANCIAL_SUPPORT_RANKINGS: RankingItem[] = [
+  { rank: 1,  name: 'TP. Hồ Chí Minh',  city: 'Miền Nam',  score: '9.910' },
+  { rank: 2,  name: 'Hà Nội',            city: 'Miền Bắc',  score: '9.890' },
+  { rank: 3,  name: 'Đà Nẵng',           city: 'Miền Trung',score: '9.860' },
+  { rank: 4,  name: 'Cần Thơ',           city: 'Miền Nam',  score: '9.831' },
+  { rank: 5,  name: 'Hải Phòng',         city: 'Miền Bắc',  score: '9.810' },
+  { rank: 6,  name: 'Khánh Hòa',         city: 'Miền Trung',score: '9.785' },
+  { rank: 7,  name: 'Quảng Ninh',        city: 'Miền Bắc',  score: '9.762' },
+  { rank: 8,  name: 'Bình Thuận',        city: 'Miền Nam',  score: '9.740' },
+  { rank: 9,  name: 'Lâm Đồng',          city: 'Tây Nguyên',score: '9.718' },
+  { rank: 10, name: 'Kiên Giang',        city: 'Miền Nam',  score: '9.694' },
+  { rank: 11, name: 'Bình Định',         city: 'Miền Trung',score: '9.671' },
+  { rank: 12, name: 'Thừa Thiên Huế',    city: 'Miền Trung',score: '9.648' },
+  { rank: 13, name: 'Nghệ An',           city: 'Miền Trung',score: '9.623' },
+  { rank: 14, name: 'Đồng Nai',          city: 'Miền Nam',  score: '9.601' },
+  { rank: 15, name: 'Vĩnh Phúc',         city: 'Miền Bắc',  score: '9.578' },
+];
 
+const INFORMATION_SUPPORT_RANKINGS: RankingItem[] = [
+  { rank: 1,  name: 'Hà Nội',            city: 'Miền Bắc',  score: '9.880' },
+  { rank: 2,  name: 'TP. Hồ Chí Minh',  city: 'Miền Nam',  score: '9.862' },
+  { rank: 3,  name: 'Đà Nẵng',           city: 'Miền Trung',score: '9.843' },
+  { rank: 4,  name: 'Quảng Ninh',        city: 'Miền Bắc',  score: '9.820' },
+  { rank: 5,  name: 'Khánh Hòa',         city: 'Miền Trung',score: '9.798' },
+  { rank: 6,  name: 'Hải Phòng',         city: 'Miền Bắc',  score: '9.775' },
+  { rank: 7,  name: 'Lào Cai',           city: 'Miền Bắc',  score: '9.750' },
+  { rank: 8,  name: 'Cần Thơ',           city: 'Miền Nam',  score: '9.727' },
+  { rank: 9,  name: 'Lâm Đồng',          city: 'Tây Nguyên',score: '9.702' },
+  { rank: 10, name: 'Bình Dương',        city: 'Miền Nam',  score: '9.679' },
+  { rank: 11, name: 'Thừa Thiên Huế',    city: 'Miền Trung',score: '9.654' },
+  { rank: 12, name: 'Đắk Lắk',           city: 'Tây Nguyên',score: '9.630' },
+  { rank: 13, name: 'Bình Thuận',        city: 'Miền Nam',  score: '9.607' },
+  { rank: 14, name: 'Ninh Bình',         city: 'Miền Bắc',  score: '9.581' },
+  { rank: 15, name: 'Gia Lai',           city: 'Tây Nguyên',score: '9.558' },
+];
+
+const FIELD_SUPPORT_RANKINGS: RankingItem[] = [
+  { rank: 1,  name: 'Đà Nẵng',           city: 'Miền Trung',score: '9.901' },
+  { rank: 2,  name: 'Hà Nội',            city: 'Miền Bắc',  score: '9.882' },
+  { rank: 3,  name: 'TP. Hồ Chí Minh',  city: 'Miền Nam',  score: '9.868' },
+  { rank: 4,  name: 'Quảng Nam',         city: 'Miền Trung',score: '9.845' },
+  { rank: 5,  name: 'Khánh Hòa',         city: 'Miền Trung',score: '9.821' },
+  { rank: 6,  name: 'Hải Phòng',         city: 'Miền Bắc',  score: '9.798' },
+  { rank: 7,  name: 'Quảng Ninh',        city: 'Miền Bắc',  score: '9.774' },
+  { rank: 8,  name: 'Lâm Đồng',          city: 'Tây Nguyên',score: '9.750' },
+  { rank: 9,  name: 'Cần Thơ',           city: 'Miền Nam',  score: '9.724' },
+  { rank: 10, name: 'Bình Định',         city: 'Miền Trung',score: '9.700' },
+  { rank: 11, name: 'Thừa Thiên Huế',    city: 'Miền Trung',score: '9.675' },
+  { rank: 12, name: 'Đồng Nai',          city: 'Miền Nam',  score: '9.651' },
+  { rank: 13, name: 'Gia Lai',           city: 'Tây Nguyên',score: '9.626' },
+  { rank: 14, name: 'Nghệ An',           city: 'Miền Trung',score: '9.600' },
+  { rank: 15, name: 'Kiên Giang',        city: 'Miền Nam',  score: '9.576' },
+];
+
+// ─── Leaderboard Card ───────────────────────────────────────────────────────
+interface LeaderboardCardProps {
+  title: string;
+  col1Label: string;
+  col2Label: string;
+  items: RankingItem[];
+}
+
+function LeaderboardCard({ title, col1Label, col2Label, items }: LeaderboardCardProps) {
   return (
-    <section className="relative py-12 lg:py-16 overflow-hidden">
-      <div className="absolute inset-0 z-0">
-        <img src={backgroundImg.src} alt="" className="w-full h-full object-cover opacity-50" />
-        <div className="absolute inset-0 bg-white/10" />
+    <div className="flex flex-col rounded-[3px] overflow-hidden shadow-xl min-w-0">
+      {/* Header */}
+      <div className="bg-[#fb7104] px-3 pt-3 pb-2 shrink-0">
+        <h3 className="font-black text-[12px] text-white tracking-[1.4px] uppercase mb-3 leading-tight">
+          {title}
+        </h3>
+        {/* Column labels */}
+        <div className="flex items-center gap-1 mb-1">
+          <span className="w-5 shrink-0 font-black text-[10px] text-[#ffd0a2] tracking-[0.8px]">STT</span>
+          <span className="flex-1 min-w-0 font-black text-[10px] text-[#ffd0a2] tracking-[0.8px]">{col1Label}</span>
+          <span className="w-12 shrink-0 font-black text-[10px] text-[#ffd0a2] tracking-[0.8px] text-right">{col2Label}</span>
+        </div>
+        {/* Divider */}
+        <div className="h-px bg-white/60" />
       </div>
 
-      <div className="relative z-10 container mx-auto px-4">
-        <div className="text-center mb-8 lg:mb-12">
-          {/* RESPONSIVE: Chữ tiêu đề chạy từ 4xl (Mobile) lên 6xl (Laptop) */}
-          <h2 className="text-4xl md:text-5xl lg:text-6xl font-black text-[#BA252E] mb-2 tracking-wide">
-            BẢNG XẾP HẠNG
-          </h2>
-        </div>
-
-        {/* RESPONSIVE: Grid chạy 1 cột trên mobile/tablet, 3 cột trên Laptop (lg) */}
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 max-w-md md:max-w-xl lg:max-w-[1200px] mx-auto items-center">
-          {boards.map((board) => (
-            <div 
-              key={board.type} 
-              // FIX 2: Loại bỏ h-[...] cố định. Dùng h-full để thẻ tự giãn theo nội dung.
-              // Giữ lại pb-8 để tạo khoảng thở ở đáy.
-              className={`relative bg-[#FB7104] rounded-[3px] shadow-xl overflow-hidden group transition-all duration-300 flex flex-col 
-                ${board.isCenter 
-                  ? 'p-5 lg:p-6 lg:py-8 lg:scale-105 z-10' // Card giữa: Padding to hơn, thụt thò (scale) ra ngoài
-                  : 'p-4 lg:p-5 lg:py-6 opacity-90 hover:opacity-100' // Card 2 bên: Padding nhỏ hơn, hơi mờ
-                }`}
-            >
-              <h3 className="font-['Inter',sans-serif] font-black text-[13px] lg:text-[14px] text-white tracking-[1.68px] mb-4 lg:mb-6 uppercase text-center shrink-0">
-                {board.title}
-              </h3>
-              
-              <div className="flex justify-between mb-2 shrink-0">
-                <span className="font-['Inter',sans-serif] font-black text-[11px] lg:text-[12px] text-[#ffd0a2] tracking-[0.96px]">{board.col1}</span>
-                <span className="font-['Inter',sans-serif] font-black text-[11px] lg:text-[12px] text-[#ffd0a2] tracking-[0.96px]">{board.col2}</span>
+      {/* Scrollable rows */}
+      <div className="bg-[#fb7104] overflow-y-auto" style={{ maxHeight: 340, scrollbarWidth: 'thin', scrollbarColor: '#f97316 transparent' }}>
+        <div className="px-3 pb-3 space-y-[6px] pt-2">
+          {items.map((item) => (
+            <div key={item.rank} className="flex items-center gap-1">
+              <span className="w-5 shrink-0 font-black text-[12px] text-white">{item.rank}</span>
+              <div className="flex-1 min-w-0">
+                <p className="font-black text-[11px] text-white truncate leading-tight">{item.name}</p>
+                <p className="font-semibold text-[9px] text-[#ffd0a2] truncate leading-tight">{item.city}</p>
               </div>
-              
-              <div className="h-[1px] bg-white mb-3 shrink-0" />
-              
-              <div className={`flex-1 flex flex-col justify-between ${board.isCenter ? 'space-y-4' : 'space-y-3'}`}>
-                {board.data.slice(0, 8).map(item => renderRow(item, false))}
-              </div>
-
-              <div 
-                className="absolute inset-x-0 bottom-0 h-20 bg-gradient-to-t from-[#fb7104] via-[#fb7104]/90 to-transparent flex items-end justify-center pb-4 opacity-0 group-hover:opacity-100 transition-all duration-300 cursor-pointer"
-                onClick={() => setActiveModal(board.type)}
-              >
-                <span className="font-black text-white text-[14px] lg:text-[16px] tracking-widest uppercase hover:scale-110 transition-transform">
-                  XEM THÊM
-                </span>
-              </div>
+              <span className="w-12 shrink-0 font-black text-[11px] text-white text-right">{item.score}</span>
             </div>
           ))}
         </div>
       </div>
+    </div>
+  );
+}
 
-      {/* --- POPUP MODAL --- */}
-      {activeModal && (() => {
-        const activeData = boards.find(b => b.type === activeModal);
-        if (!activeData) return null;
+// ─── Main LeaderboardSection ─────────────────────────────────────────────────
+export const LeaderboardSection: React.FC = () => {
+  return (
+    <section className="relative py-16 overflow-hidden">
+      {/* Background with blur and overlay */}
+      <div className="absolute inset-0 z-0">
+        <img
+          src={imgRectangle30}
+          alt=""
+          className="w-full h-full object-cover opacity-50"
+        />
+        <div className="absolute inset-0 bg-white/50" />
+      </div>
 
-        return (
-          <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 bg-black/70 animate-in fade-in duration-200">
-            {/* RESPONSIVE: Modal rộng 95% trên mobile (w-[95%]), max-width 2xl trên desktop */}
-            <div className="bg-white rounded-xl sm:rounded-2xl shadow-2xl w-[95%] sm:w-full max-w-2xl flex flex-col max-h-[85vh] overflow-hidden relative">
-              
-              <button 
-                onClick={() => setActiveModal(null)}
-                className="absolute top-3 right-3 sm:top-4 sm:right-4 w-7 h-7 sm:w-8 sm:h-8 flex items-center justify-center rounded-full bg-red-100 text-red-600 hover:bg-red-200 transition-colors z-10"
-              >
-                ✕
-              </button>
+      {/* Content */}
+      <div className="relative z-10 container mx-auto px-4">
+        {/* Title */}
+        <div className="text-center mb-10">
+          <h2 className="text-5xl md:text-6xl font-black text-[#8b3a3a] mb-2 tracking-wide">
+            BẢNG XẾP HẠNG
+          </h2>
+        </div>
 
-              <div className="p-4 sm:p-6 pb-2 text-center border-b border-gray-100">
-                <h2 className="text-xl sm:text-2xl font-black text-[#8b3a3a] uppercase mb-4 sm:mb-6 tracking-wide pr-8 sm:pr-0">
-                  {activeData.title}
-                </h2>
-                <div className="flex justify-between px-1 sm:px-2">
-                  <span className="font-['Inter',sans-serif] font-semibold text-[11px] sm:text-[13px] text-gray-500">{activeData.col1}</span>
-                  <span className="font-['Inter',sans-serif] font-semibold text-[11px] sm:text-[13px] text-gray-500">{activeData.col2}</span>
-                </div>
-              </div>
-
-              <div className="p-3 sm:p-4 px-4 sm:px-6 overflow-y-auto [&::-webkit-scrollbar]:w-1.5 sm:[&::-webkit-scrollbar]:w-2 [&::-webkit-scrollbar-track]:bg-gray-100 [&::-webkit-scrollbar-thumb]:bg-gray-400 [&::-webkit-scrollbar-thumb]:rounded-full">
-                <div className="space-y-1">
-                  {activeData.data.map(item => renderRow(item, true))}
-                </div>
-              </div>
-              
-            </div>
-          </div>
-        );
-      })()}
+        {/* Five ranking cards */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4 max-w-[1280px] mx-auto">
+          <LeaderboardCard
+            title="Địa điểm Top Trending"
+            col1Label="Tên địa điểm"
+            col2Label="Chỉ số"
+            items={TRENDING_LOCATIONS}
+          />
+          <LeaderboardCard
+            title="Hạ tầng"
+            col1Label="Tên địa điểm"
+            col2Label="Chỉ số"
+            items={INFRASTRUCTURE_RANKINGS}
+          />
+          <LeaderboardCard
+            title="Hỗ trợ tài chính"
+            col1Label="Tên địa điểm"
+            col2Label="Chỉ số"
+            items={FINANCIAL_SUPPORT_RANKINGS}
+          />
+          <LeaderboardCard
+            title="Hỗ trợ thông tin"
+            col1Label="Tên địa điểm"
+            col2Label="Chỉ số"
+            items={INFORMATION_SUPPORT_RANKINGS}
+          />
+          <LeaderboardCard
+            title="Hỗ trợ thực địa"
+            col1Label="Tên địa điểm"
+            col2Label="Chỉ số"
+            items={FIELD_SUPPORT_RANKINGS}
+          />
+        </div>
+      </div>
     </section>
   );
 };

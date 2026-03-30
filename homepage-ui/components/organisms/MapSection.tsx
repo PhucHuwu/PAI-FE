@@ -3,6 +3,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import dynamic from "next/dynamic";
 import svgPaths from "@/public/import/svg-0oavri3lkq";
+import starPaths from "@/public/import/svg-a1gxlu5vx";
 import imgVinhHaLong from "@/public/assets/danh-lam-thang-canh-viet-nam.png";
 import globalIcon from "@/public/assets/global-icon.svg";
 import handPointerIcon from "@/public/assets/hand-icon.png";
@@ -50,6 +51,115 @@ const PROVINCE_NAMES: Record<string, string> = {
   HaNoi: "Hà Nội",
 };
 
+// ─── Province PAI ranks (mock data) ──────────────────────────────────────────
+const PROVINCE_PAI: Record<string, { rank: number; score: number }> = {
+  HaNoi: { rank: 1, score: 98 },
+  TPHCM: { rank: 2, score: 97 },
+  DaNanh: { rank: 3, score: 95 },
+  HaiPhong: { rank: 4, score: 93 },
+  CanTho: { rank: 5, score: 91 },
+  QuangNinh: { rank: 6, score: 90 },
+  LamDong: { rank: 7, score: 88 },
+  KhanhHoa: { rank: 8, score: 87 },
+  LaoCai: { rank: 9, score: 85 },
+  NgheAn: { rank: 10, score: 83 },
+  ThanhHoa: { rank: 11, score: 82 },
+  DakLak: { rank: 12, score: 80 },
+  GiaLai: { rank: 13, score: 79 },
+  Hue: { rank: 14, score: 77 },
+  NinhBinh: { rank: 15, score: 76 },
+  DongNai: { rank: 16, score: 75 },
+  BacNinh: { rank: 17, score: 74 },
+  QuangNam: { rank: 18, score: 73 },
+  QuangNgai: { rank: 19, score: 71 },
+  HaTinh: { rank: 20, score: 70 },
+  QuangTri: { rank: 21, score: 68 },
+  TayNinh: { rank: 22, score: 67 },
+  DongThap: { rank: 23, score: 65 },
+  AnGiang: { rank: 24, score: 64 },
+  VinhLong: { rank: 25, score: 62 },
+  CaMau: { rank: 26, score: 61 },
+  SonLa: { rank: 27, score: 59 },
+  LaiChau: { rank: 28, score: 58 },
+  DienBien: { rank: 29, score: 56 },
+  LangSon: { rank: 30, score: 55 },
+  CaoBang: { rank: 31, score: 53 },
+  TuyenQuang: { rank: 32, score: 52 },
+  ThaiNguyen: { rank: 33, score: 50 },
+  PhuTho: { rank: 34, score: 49 },
+  HungYen: { rank: 35, score: 47 },
+};
+
+// ─── Province Info Card (PAI Panel) ──────────────────────────────────────────
+function ProvinceInfoCard({ provinceName, provinceId }: { provinceName: string; provinceId: string }) {
+  const pai = PROVINCE_PAI[provinceId] ?? { rank: 34, score: 50 };
+
+  return (
+    <div
+      className="relative shadow-2xl animate-fade-in"
+      style={{ width: 268, height: 240 }}
+    >
+      {/* Red header */}
+      <div className="absolute top-0 left-0 right-0 h-[56px] bg-[#a71a1a] rounded-tl-[16px] rounded-tr-[16px] shadow flex items-center justify-center px-3">
+        <span
+          className="text-[#ffe8d2] font-extrabold text-center leading-tight"
+          style={{ fontSize: provinceName.length > 18 ? 16 : 20 }}
+        >
+          {provinceName}
+        </span>
+      </div>
+
+      {/* White body */}
+      <div className="absolute left-0 right-0 bg-white rounded-bl-[16px] rounded-br-[16px] shadow overflow-hidden" style={{ top: 56, height: 184 }}>
+        {/* Top N – right side */}
+        <div className="absolute text-right" style={{ top: 52, right: 16 }}>
+          <span className="text-[#1272a3] font-bold" style={{ fontSize: 18 }}>Top </span>
+          <span className="text-[#1272a3] font-bold" style={{ fontSize: 28 }}>{pai.rank}</span>
+        </div>
+
+        {/* Khám phá thêm button */}
+        <div
+          className="absolute bg-[#a71a1a] rounded-[100px] flex items-center justify-center cursor-pointer hover:bg-[#c41f1f] transition-colors"
+          style={{ bottom: 12, left: 14, right: 16, height: 36 }}
+        >
+          <span className="text-white font-semibold" style={{ fontSize: 17 }}>Khám phá thêm</span>
+        </div>
+      </div>
+
+      {/* Star overlay – centered on the card */}
+      <div className="absolute pointer-events-none" style={{ top: 72, left: 78, width: 112, height: 106 }}>
+        {/* Decorative dashed grid */}
+        <svg className="absolute inset-0 w-full h-full" fill="none" preserveAspectRatio="none" viewBox="0 0 114.685 109.211">
+          <path d={starPaths.p3b1d980} stroke="#E4AB24" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.8346" />
+          <path d={starPaths.p82b4d80} stroke="#E4AB24" strokeDasharray="5.39 5.39" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.8346" />
+          <path d={starPaths.p3a593de0} stroke="#E4AB24" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.8346" />
+          <path d="M75.9536 42.0503H109.631" stroke="#E4AB24" strokeDasharray="5.39 5.39" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.8346" />
+          <path d={starPaths.pcd34f00} stroke="#E4AB24" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.8346" />
+          <path d={starPaths.p872a980} stroke="#E4AB24" strokeDasharray="5.39 5.39" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.8346" />
+          <path d={starPaths.p36d58700} stroke="#E4AB24" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.8346" />
+          <path d={starPaths.p3e7afc00} stroke="#E4AB24" strokeDasharray="5.39 5.39" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.8346" />
+          <path d={starPaths.p1ae63540} stroke="#E4AB24" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.8346" />
+          <path d={starPaths.p20b8f5a0} stroke="#E4AB24" strokeDasharray="5.39 5.39" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.8346" />
+          <path d={starPaths.p33401380} stroke="#E4AB24" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.8346" />
+          <path d={starPaths.pa5e2a00} stroke="#E4AB24" strokeDasharray="5.39 5.39" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.8346" />
+          <path d={starPaths.p9e98680} stroke="#E4AB24" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.8346" />
+          <path d={starPaths.p3102d300} stroke="#E4AB24" strokeDasharray="5.39 5.39" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.8346" />
+          <path d={starPaths.pdf82600} stroke="#E4AB24" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.8346" />
+          <path d={starPaths.p32c3c400} stroke="#E4AB24" strokeDasharray="5.39 5.39" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.8346" />
+          <path d={starPaths.p2e86cb00} stroke="#E4AB24" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.8346" />
+          <path d="M6.82659 42.0503H40.5036" stroke="#E4AB24" strokeDasharray="5.39 5.39" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.8346" />
+          <path d={starPaths.p5864e00} stroke="#E4AB24" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.8346" />
+          <path d={starPaths.p667e800} stroke="#E4AB24" strokeDasharray="5.39 5.39" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.8346" />
+        </svg>
+        {/* Filled yellow star */}
+        <svg className="absolute inset-0 w-full h-full" fill="none" preserveAspectRatio="none" viewBox="0 0 111.851 106.373">
+          <path d={starPaths.p38e3a480} fill="#E4AB24" />
+        </svg>
+      </div>
+    </div>
+  );
+}
+
 // ─── Shared Digit Box for clock ───────────────────────────────────────────────
 const DigitBox = ({ digit }: { digit: string }) => (
   <div className="bg-[#96131c] h-[76px] w-[46px] rounded-[8px] flex items-center justify-center shrink-0">
@@ -62,9 +172,10 @@ const DigitBox = ({ digit }: { digit: string }) => (
 // ─── Vietnam Map with hover interaction ──────────────────────────────────────
 interface MapInteractiveProps {
   onProvinceClick: (name: string) => void;
+  onProvinceHover?: (id: string | null, name: string | null) => void;
 }
 
-function VietnamMap({ onProvinceClick }: MapInteractiveProps) {
+function VietnamMap({ onProvinceClick, onProvinceHover }: MapInteractiveProps) {
   const [hovered, setHovered] = useState<string | null>(null);
   const [tooltip, setTooltip] = useState<{ name: string; x: number; y: number } | null>(null);
   const mapRef = useRef<HTMLDivElement>(null);
@@ -77,6 +188,7 @@ function VietnamMap({ onProvinceClick }: MapInteractiveProps) {
       setTooltip({ name, x: e.clientX - rect.left, y: e.clientY - rect.top });
     }
     setHovered(id);
+    onProvinceHover?.(id, name);
   };
 
   const handleMouseMove = (id: string, e: React.MouseEvent) => {
@@ -90,6 +202,7 @@ function VietnamMap({ onProvinceClick }: MapInteractiveProps) {
   const handleMouseLeave = () => {
     setHovered(null);
     setTooltip(null);
+    onProvinceHover?.(null, null);
   };
 
   const provinceProps = (id: string) => ({
@@ -360,29 +473,11 @@ function VietnamMap({ onProvinceClick }: MapInteractiveProps) {
 
 // ─── Main MapSection Component ────────────────────────────────────────────────
 export const MapSection: React.FC = () => {
-  const [currentTime, setCurrentTime] = useState(new Date());
-  const [useLocalTimezone, setUseLocalTimezone] = useState(false);
   const [isMapOpen, setIsMapOpen] = useState(false);
   const [initialProvince, setInitialProvince] = useState<string | null>(null);
-
-  useEffect(() => {
-    const timer = setInterval(() => setCurrentTime(new Date()), 1000);
-    return () => clearInterval(timer);
-  }, []);
-
-  const hours   = currentTime.getHours();
-  const minutes = currentTime.getMinutes();
-  const h1 = Math.floor(hours / 10).toString();
-  const h2 = (hours % 10).toString();
-  const m1 = Math.floor(minutes / 10).toString();
-  const m2 = (minutes % 10).toString();
-
-  const formatDate = () => {
-    const days = ["Chủ Nhật", "Thứ Hai", "Thứ Ba", "Thứ Tư", "Thứ Năm", "Thứ Sáu", "Thứ Bảy"];
-    const d = currentTime.getDate().toString().padStart(2, "0");
-    const mo = (currentTime.getMonth() + 1).toString().padStart(2, "0");
-    return `${days[currentTime.getDay()]}, ${d}/${mo}/${currentTime.getFullYear()}`;
-  };
+  // Default to Hà Nội (rank 1); updates on hover, resets on mouse-leave
+  const [hoveredProvinceId, setHoveredProvinceId] = useState<string>("HaNoi");
+  const [hoveredProvinceName, setHoveredProvinceName] = useState<string>("Hà Nội");
 
   const handleProvinceClick = (provinceName: string) => {
     setInitialProvince(provinceName);
@@ -392,6 +487,16 @@ export const MapSection: React.FC = () => {
   const handleOpenMap = () => {
     setInitialProvince(null);
     setIsMapOpen(true);
+  };
+
+  const handleProvinceHover = (id: string | null, name: string | null) => {
+    if (id === null || name === null) {
+      setHoveredProvinceId("HaNoi");
+      setHoveredProvinceName("Hà Nội");
+    } else {
+      setHoveredProvinceId(id);
+      setHoveredProvinceName(name);
+    }
   };
 
   return (
@@ -409,7 +514,7 @@ export const MapSection: React.FC = () => {
             <img
               alt="Vịnh Hạ Long"
               className="absolute h-[128.82%] left-0 max-w-none top-[-19.3%] w-full object-cover"
-              src={imgVinhHaLong.src}
+              src={imgVinhHaLong}
             />
           </div>
           <div className="absolute flex h-[732px] items-center justify-center left-[104px] top-px w-[1440px]">
@@ -429,83 +534,31 @@ export const MapSection: React.FC = () => {
         <div className="relative h-full max-w-[1440px] mx-auto flex items-start justify-between pl-16 pr-80 py-20">
 
           {/* Left Column */}
-          <div className="flex flex-col gap-32 w-[453px] items-end justify-center">
-            {/* Section text */}
-            <div className="flex flex-col gap-[19px] items-start text-white w-full">
-              <p className="font-black leading-none text-[40px]">34 TỈNH THÀNH</p>
-              <p className="font-medium leading-[18px] text-[16px]">
-                Đến đây, ngoài việc đứng trên các đồi chè ngắm nhìn khung cảnh rộng lớn,
-                xanh miết thì bạn cũng có thể mua vé đi thuyền hoặc xuồng máy
+          <div className="flex flex-col gap-8 w-[453px] items-start justify-center h-full">
+            {/* PAI Title */}
+            <div className="text-white">
+              <p className="font-black leading-none text-[52px] md:text-[64px] tracking-tight uppercase">PRODUCTION</p>
+              <p className="font-black leading-tight text-[28px] uppercase">ATTRACTION INDEX  (PAI)</p>
+              <p className="font-normal leading-relaxed text-[14px] mt-4 max-w-[380px] text-white/90">
+                Chỉ số thu hút đoàn làm phim là hệ thống chỉ số đánh giá mức độ
+                hấp dẫn của các địa phương tại Việt Nam đối với hoạt động sản
+                xuất phim. PAI giúp nhà làm phim nhanh chóng so sánh và lựa
+                chọn địa điểm phù hợp – hướng tới việc tối ưu hóa quyết định
+                sản xuất và thúc đẩy ngành công nghiệp điện ảnh phát triển.
               </p>
             </div>
 
-            {/* Clock card */}
-            <div className="bg-[#f6e8e8] flex flex-col items-center gap-[14px] pt-5 pb-[11px] px-[10px] rounded-[17px] w-[267px]">
-              {/* Title */}
-              <p className="font-black text-[#96131c] text-[20px] leading-tight text-center w-full">
-                GIỜ VIỆT NAM (GMT+7)
-              </p>
-
-              {/* Time row */}
-              <div className="flex gap-[4px] items-center">
-                <DigitBox digit={h1} />
-                <DigitBox digit={h2} />
-                {/* Colon dots */}
-                <div className="h-[31px] shrink-0 w-[13px] relative">
-                  <svg className="absolute block size-full" fill="none" preserveAspectRatio="none" viewBox="0 0 13 31">
-                    <circle cx="6.5" cy="6.5"  fill="#96131C" r="6.5" />
-                    <circle cx="6.5" cy="24.5" fill="#96131C" r="6.5" />
-                  </svg>
-                </div>
-                <DigitBox digit={m1} />
-                <DigitBox digit={m2} />
-
-                {/* CH / SA label + clock icon */}
-                <div className="flex flex-col items-center justify-between h-[76px] pb-1 pl-1 shrink-0">
-                  <p className="font-semibold text-[#96131c] text-[20px] leading-none mt-1">
-                    {hours >= 12 ? "CH" : "SA"}
-                  </p>
-                  <div className="relative size-[26px]">
-                    <svg className="absolute block size-full" fill="none" preserveAspectRatio="none" viewBox="0 0 26 26">
-                      <g clipPath="url(#clip0_clock)">
-                        <path d={svgPaths.p289fe500} fill="#96131C" />
-                        <path d={svgPaths.p232f95f0} fill="#96131C" />
-                        <path d={svgPaths.p1545f00}  fill="#96131C" />
-                      </g>
-                      <defs>
-                        <clipPath id="clip0_clock">
-                          <rect fill="white" height="26" width="26" />
-                        </clipPath>
-                      </defs>
-                    </svg>
-                  </div>
-                </div>
-              </div>
-
-              {/* Date */}
-              <p className="font-normal text-[#96131c] text-[16px] leading-tight text-center w-full">
-                {formatDate()}
-              </p>
-
-              {/* Timezone toggle */}
-              <div className="bg-white flex items-center gap-[12px] px-[7px] py-[6px] rounded-[14px] w-[205px]">
-                <button
-                  onClick={() => setUseLocalTimezone(!useLocalTimezone)}
-                  className="relative w-[28px] h-[15px] bg-[#d9d9d9] rounded-[7.5px] flex items-center px-[2px] cursor-pointer shrink-0 transition-colors"
-                  style={{ backgroundColor: useLocalTimezone ? "#96131c" : "#d9d9d9" }}
-                >
-                  <div className={`w-[11px] h-[11px] bg-white rounded-full shadow transition-transform ${useLocalTimezone ? "translate-x-[13px]" : ""}`} />
-                </button>
-                <p className="font-normal text-[10px] text-black whitespace-nowrap">Xem theo múi giờ của bạn</p>
-                <img alt="globe" className="size-[15px] object-cover shrink-0" src={globalIcon.src} />
-              </div>
-            </div>
+            {/* PAI Province Card - default Hà Nội, updates on map hover */}
+            <ProvinceInfoCard
+              provinceName={hoveredProvinceName}
+              provinceId={hoveredProvinceId}
+            />
           </div>
 
           {/* Right Column — Map */}
           <div className="h-[568.966px] relative shrink-0 w-[539.656px]">
             {/* Interactive Vietnam map */}
-            <VietnamMap onProvinceClick={handleProvinceClick} />
+            <VietnamMap onProvinceClick={handleProvinceClick} onProvinceHover={handleProvinceHover} />
 
             {/* Pulse + "Nhấn để xem thêm" */}
             {/* isolate → tạo stacking context riêng để nhốt animated spans */}
@@ -539,16 +592,15 @@ export const MapSection: React.FC = () => {
               >
                 <img alt="Hand icon" className="absolute inset-0 object-cover size-full" src={handPointerIcon.src} />
               </button>
-              {/* Label — z-10 tương tự */}
-              <button
-                onClick={handleOpenMap}
-                className="absolute cursor-pointer group z-10"
+              {/* Label — "di chuột để xem thêm" */}
+              <div
+                className="absolute z-10"
                 style={{ left: 3, top: 38 }}
               >
-                <p className="font-bold italic text-[#ba252e] text-[16px] leading-[18px] w-[95px] group-hover:text-[#9e1f27] transition-colors">
-                  Nhấn để xem thêm
+                <p className="font-bold italic text-[#ba252e] text-[16px] leading-[18px] w-[95px]">
+                  di chuột để xem thêm
                 </p>
-              </button>
+              </div>
             </div>
           </div>
         </div>

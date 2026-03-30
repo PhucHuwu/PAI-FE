@@ -8,12 +8,9 @@ import { MapSection } from '@/components/organisms/MapSection'
 export default function HomePage() {
   return (
     <>
-      <HeroBanner />
       <MapSection />
-      <FilmCrewAttractionIndex />
-      <HotLocations />
       <LeaderboardSection />
-      <MovieSection />
+      <FilmCrewAttractionIndex />
     </>
   )
 }
