@@ -5,7 +5,7 @@ import { LegendCard } from '../molecules/LegendCard';
 
 // BƯỚC 2: Import ảnh nền mới từ thư mục assets của bạn
 // Giả sử em đã tạo thư mục `src/assets/images/` và đặt tên ảnh là `turtle_tower.png`
-import mainPicImage from '@/public/assets/mainpic.jpeg'; 
+import turtleTowerImage from '@/public/assets/ho-guom.png'; 
 
 // Mock data for 34 Vietnamese provinces (Mã này không thay đổi)
 const provinces = [
@@ -38,7 +38,7 @@ export function FilmCrewAttractionIndex() {
         className="absolute inset-0 bg-cover bg-center"
         style={{
           // backgroundImage: `url('https://images.unsplash.com/...')`, // Dòng cũ
-          backgroundImage: `url(${mainPicImage.src})`,
+          backgroundImage: `url(${turtleTowerImage.src})`,
           filter: 'blur(2px)',
           transform: 'scale(1.1)'
         }}

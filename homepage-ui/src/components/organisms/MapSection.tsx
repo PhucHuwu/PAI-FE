@@ -4,9 +4,9 @@ import React, { useState, useEffect, useRef } from "react";
 import dynamic from "next/dynamic";
 import svgPaths from '@/assets/import/svg-0oavri3lkq';
 import starPaths from '@/assets/import/svg-a1gxlu5vx';
-import imgVinhHaLong from "@/public/assets/danh-lam-thang-canh-viet-nam.png";
+import mainPicImage from "@/public/assets/mainpic.jpeg";
 import globalIcon from "@/public/assets/global-icon.svg";
-import handPointerIcon from "@/public/assets/mainpic.jpeg";
+import handPointerIcon from "@/public/assets/hand-icon.png";
 
 const LeafletMapModal = dynamic(
   () => import('./LeafletMapModal').then((mod) => mod.LeafletMapModal),
@@ -523,7 +523,7 @@ export const MapSection: React.FC = () => {
             <img
               alt="Vịnh Hạ Long"
               className="absolute h-[128.82%] left-0 max-w-none top-[-19.3%] w-full object-cover"
-              src={imgVinhHaLong}
+              src={mainPicImage.src}
             />
           </div>
           <div className="absolute flex h-[732px] items-center justify-center left-[104px] top-px w-[1440px]">
