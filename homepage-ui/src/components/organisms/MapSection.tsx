@@ -26,7 +26,7 @@ const PROVINCE_NAMES: Record<string, string> = {
   LangSon: "Lạng Sơn",
   ThanhHoa: "Thanh Hóa",
   QuangTri: "Quảng Trị",
-  Hue: "Thừa Thiên Huế",
+  Hue: "Huế",
   DongThap: "Đồng Tháp",
   TayNinh: "Tây Ninh",
   DakLak: "Đắk Lắk",
@@ -52,49 +52,60 @@ const PROVINCE_NAMES: Record<string, string> = {
   HaNoi: "Hà Nội",
 };
 
-// ─── Province PAI ranks (mock data) ──────────────────────────────────────────
-const PROVINCE_PAI: Record<string, { rank: number; score: number }> = {
-  HaNoi: { rank: 1, score: 98 },
-  TPHCM: { rank: 2, score: 97 },
-  DaNanh: { rank: 3, score: 95 },
-  HaiPhong: { rank: 4, score: 93 },
-  CanTho: { rank: 5, score: 91 },
-  QuangNinh: { rank: 6, score: 90 },
-  LamDong: { rank: 7, score: 88 },
-  KhanhHoa: { rank: 8, score: 87 },
-  LaoCai: { rank: 9, score: 85 },
-  NgheAn: { rank: 10, score: 83 },
-  ThanhHoa: { rank: 11, score: 82 },
-  DakLak: { rank: 12, score: 80 },
-  GiaLai: { rank: 13, score: 79 },
-  Hue: { rank: 14, score: 77 },
-  NinhBinh: { rank: 15, score: 76 },
-  DongNai: { rank: 16, score: 75 },
-  BacNinh: { rank: 17, score: 74 },
-  QuangNam: { rank: 18, score: 73 },
-  QuangNgai: { rank: 19, score: 71 },
-  HaTinh: { rank: 20, score: 70 },
-  QuangTri: { rank: 21, score: 68 },
-  TayNinh: { rank: 22, score: 67 },
-  DongThap: { rank: 23, score: 65 },
-  AnGiang: { rank: 24, score: 64 },
-  VinhLong: { rank: 25, score: 62 },
-  CaMau: { rank: 26, score: 61 },
-  SonLa: { rank: 27, score: 59 },
-  LaiChau: { rank: 28, score: 58 },
-  DienBien: { rank: 29, score: 56 },
-  LangSon: { rank: 30, score: 55 },
-  CaoBang: { rank: 31, score: 53 },
-  TuyenQuang: { rank: 32, score: 52 },
-  ThaiNguyen: { rank: 33, score: 50 },
-  PhuTho: { rank: 34, score: 49 },
-  HungYen: { rank: 35, score: 47 },
+type ProvinceId = keyof typeof PROVINCE_NAMES;
+
+const PROVINCE_SCORES: Record<ProvinceId, number> = {
+  HaNoi: 98,
+  TPHCM: 97,
+  DaNanh: 95,
+  HaiPhong: 93,
+  CanTho: 91,
+  QuangNinh: 90,
+  LamDong: 88,
+  KhanhHoa: 87,
+  LaoCai: 85,
+  NgheAn: 83,
+  ThanhHoa: 82,
+  DakLak: 80,
+  GiaLai: 79,
+  Hue: 77,
+  NinhBinh: 76,
+  DongNai: 75,
+  BacNinh: 74,
+  QuangNgai: 73,
+  HaTinh: 71,
+  QuangTri: 70,
+  TayNinh: 68,
+  DongThap: 67,
+  AnGiang: 65,
+  VinhLong: 64,
+  CaMau: 63,
+  SonLa: 61,
+  LaiChau: 60,
+  DienBien: 58,
+  LangSon: 57,
+  CaoBang: 55,
+  TuyenQuang: 54,
+  ThaiNguyen: 52,
+  PhuTho: 51,
+  HungYen: 50,
 };
+
+const PROVINCE_PAI: Record<ProvinceId, { rank: number; score: number }> = (() => {
+  const sorted = (Object.entries(PROVINCE_SCORES) as [ProvinceId, number][]).sort((a, b) => b[1] - a[1]);
+  const result = {} as Record<ProvinceId, { rank: number; score: number }>;
+
+  sorted.forEach(([id, score], index) => {
+    result[id] = { rank: index + 1, score };
+  });
+
+  return result;
+})();
 
 // ─── Province Info Card (PAI Panel) ──────────────────────────────────────────
 function ProvinceInfoCard({ provinceName, provinceId }: { provinceName: string; provinceId: string }) {
   const router = useRouter();
-  const pai = PROVINCE_PAI[provinceId] ?? { rank: 34, score: 50 };
+  const pai = PROVINCE_PAI[provinceId as ProvinceId] ?? { rank: Object.keys(PROVINCE_NAMES).length, score: 50 };
   const chartData: StarChartDataPoint[] = [
     { criterion: 'Hạ tầng sẵn có', value: Math.max(1, Math.min(5, Math.round(pai.score / 20) + 1)), fullMark: 5 },
     { criterion: 'Hỗ trợ tài chính', value: Math.max(1, Math.min(5, Math.round((pai.score - 8) / 20) + 1)), fullMark: 5 },

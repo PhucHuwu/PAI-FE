@@ -7,15 +7,15 @@ import { LegendCard } from '../molecules/LegendCard';
 // Giả sử em đã tạo thư mục `src/assets/images/` và đặt tên ảnh là `turtle_tower.png`
 import turtleTowerImage from '@/public/assets/ho-guom.png'; 
 
-// Mock data for 34 Vietnamese provinces (Mã này không thay đổi)
+// Mock data for 34 Vietnamese provinces (post-2025)
 const provinces = [
-  'Hà Nội', 'Hồ Chí Minh', 'Đà Nẵng', 'Hải Phòng', 'Cần Thơ',
-  'Hà Giang', 'Cao Bằng', 'Lai Châu', 'Lào Cai', 'Tuyên Quang',
-  'Lạng Sơn', 'Bắc Kạn', 'Thái Nguyên', 'Yên Bái', 'Sơn La',
-  'Phú Thọ', 'Vĩnh Phúc', 'Bắc Ninh', 'Hải Dương', 'Hưng Yên',
-  'Hòa Bình', 'Hà Nam', 'Nam Định', 'Thái Bình', 'Ninh Bình',
-  'Thanh Hóa', 'Nghệ An', 'Hà Tĩnh', 'Quảng Bình', 'Quảng Trị',
-  'Thừa Thiên Huế', 'Quảng Nam', 'Quảng Ngãi', 'Bình Định'
+  'Hà Nội', 'TP. Hồ Chí Minh', 'Đà Nẵng', 'Hải Phòng', 'Cần Thơ',
+  'Quảng Ninh', 'Lâm Đồng', 'Nghệ An', 'Khánh Hòa', 'Điện Biên',
+  'An Giang', 'Bắc Ninh', 'Lạng Sơn', 'Thanh Hóa', 'Quảng Trị',
+  'Huế', 'Đồng Tháp', 'Tây Ninh', 'Đắk Lắk', 'Vĩnh Long',
+  'Sơn La', 'Lào Cai', 'Ninh Bình', 'Lai Châu', 'Thái Nguyên',
+  'Tuyên Quang', 'Quảng Ngãi', 'Gia Lai', 'Cà Mau', 'Hưng Yên',
+  'Đồng Nai', 'Phú Thọ', 'Hà Tĩnh', 'Cao Bằng'
 ];
 
 const generateProvinceData = (index: number): StarChartDataPoint[] => {
