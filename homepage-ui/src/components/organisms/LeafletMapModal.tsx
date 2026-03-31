@@ -1,8 +1,8 @@
 "use client";
 
-import React from "react";
-import { CircleMarker, MapContainer, Popup, TileLayer } from "react-leaflet";
-import type { LatLngExpression } from "leaflet";
+import React, { useEffect, useState } from "react";
+import { GeoJSON, MapContainer, Popup, useMap } from "react-leaflet";
+import type { LatLngBoundsExpression, LatLngExpression } from "leaflet";
 
 interface LeafletMapModalProps {
     isOpen: boolean;
@@ -11,6 +11,32 @@ interface LeafletMapModalProps {
 }
 
 const DEFAULT_CENTER: LatLngExpression = [16.0471, 108.2068];
+const VIETNAM_BOUNDS: LatLngBoundsExpression = [
+    [8.2, 102.0],
+    [23.7, 110.8],
+];
+
+type ProvinceFeature = {
+    type: "Feature";
+    properties: {
+        TinhThanh?: string;
+        SapNhap?: string;
+        Loai?: string;
+        SoXa?: number;
+        Dtich_km2?: number;
+        DanSo_ng?: number;
+        [key: string]: string | number | undefined;
+    };
+    geometry: {
+        type: string;
+        coordinates: unknown;
+    };
+};
+
+type ProvinceFeatureCollection = {
+    type: "FeatureCollection";
+    features: ProvinceFeature[];
+};
 
 const PROVINCE_COORDS: Record<string, { center: LatLngExpression; label: string }> = {
     "Hà Nội": { center: [21.0278, 105.8342], label: "Hà Nội" },
@@ -44,23 +70,117 @@ const PROVINCE_COORDS: Record<string, { center: LatLngExpression; label: string 
     "Hải Phòng": { center: [20.8449, 106.6881], label: "Hải Phòng" },
     "Hưng Yên": { center: [20.6464, 106.0511], label: "Hưng Yên" },
     "Đồng Nai": { center: [11.0686, 107.1676], label: "Đồng Nai" },
+    "Quảng Ngãi": { center: [15.1205, 108.7923], label: "Quảng Ngãi" },
+    "Gia Lai": { center: [13.8079, 108.1094], label: "Gia Lai" },
+    "Cà Mau": { center: [9.1768, 105.1524], label: "Cà Mau" },
+    "Huế": { center: [16.4637, 107.5909], label: "Huế" },
 };
 
+function normalizeProvinceKey(name: string): string {
+    const normalized = name
+        .toLowerCase()
+        .normalize("NFD")
+        .replace(/[\u0300-\u036f]/g, "")
+        .replace(/[^a-z0-9]/g, "");
+
+    if (normalized === "thuathienhue") return "hue";
+    return normalized;
+}
+
+function ViewUpdater({ center, zoom }: { center: LatLngExpression; zoom: number }) {
+    const map = useMap();
+
+    useEffect(() => {
+        map.setView(center, zoom, { animate: true });
+    }, [center, zoom, map]);
+
+    return null;
+}
+
 export function LeafletMapModal({ isOpen, onClose, initialProvince }: LeafletMapModalProps) {
+    const [geoData, setGeoData] = useState<ProvinceFeatureCollection | null>(null);
+    const [loadError, setLoadError] = useState<string | null>(null);
+    const [activeProvince, setActiveProvince] = useState<string | null>(initialProvince);
+
+    useEffect(() => {
+        setActiveProvince(initialProvince);
+    }, [initialProvince]);
+
+    useEffect(() => {
+        if (!isOpen || geoData) return;
+
+        let isCancelled = false;
+
+        fetch("/data/vn-provinces-post-2025.geojson")
+            .then((res) => {
+                if (!res.ok) throw new Error(`HTTP ${res.status}`);
+                return res.json() as Promise<ProvinceFeatureCollection>;
+            })
+            .then((data) => {
+                if (!isCancelled) {
+                    setGeoData(data);
+                    setLoadError(null);
+                }
+            })
+            .catch(() => {
+                if (!isCancelled) {
+                    setLoadError("Không thể tải dữ liệu ranh giới 34 tỉnh/thành.");
+                }
+            });
+
+        return () => {
+            isCancelled = true;
+        };
+    }, [geoData, isOpen]);
+
     if (!isOpen) return null;
 
-    const selected = initialProvince ? PROVINCE_COORDS[initialProvince] : null;
+    const selectedKey = activeProvince ? normalizeProvinceKey(activeProvince) : null;
+    const selectedFeature = geoData?.features.find((feature) => {
+        const name = feature.properties?.TinhThanh;
+        return name && selectedKey ? normalizeProvinceKey(name) === selectedKey : false;
+    });
+    const selectedName = selectedFeature?.properties?.TinhThanh ?? activeProvince;
+
+    const selected = selectedName ? PROVINCE_COORDS[selectedName] : null;
     const center = selected?.center ?? DEFAULT_CENTER;
-    const zoom = selected ? 8 : 6;
+    const zoom = selected ? 7 : 6;
+
+    const styleFeature = (feature: ProvinceFeature) => {
+        const name = feature.properties?.TinhThanh;
+        const isSelected = Boolean(name && selectedKey && normalizeProvinceKey(name) === selectedKey);
+
+        return {
+            color: isSelected ? "#BA252E" : "#9ca3af",
+            weight: isSelected ? 2.2 : 1,
+            fillColor: isSelected ? "#FB7104" : "#374151",
+            fillOpacity: isSelected ? 0.45 : 0.2,
+        };
+    };
+
+    const handleEachFeature = (feature: ProvinceFeature, layer: any) => {
+        const name = feature.properties?.TinhThanh;
+        if (!name) return;
+
+        const loai = feature.properties?.Loai ?? "Đơn vị hành chính";
+        const soXa = typeof feature.properties?.SoXa === "number" ? feature.properties.SoXa : null;
+
+        layer.bindPopup(`<div style=\"font-weight:700\">${name}</div><div>${loai}${soXa ? ` • ${soXa} xã/phường` : ""}</div>`);
+        layer.on({
+            click: () => setActiveProvince(name),
+        });
+    };
 
     return (
         <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black/60 p-4" role="dialog" aria-modal="true">
             <div className="w-full max-w-3xl rounded-2xl bg-white p-6 shadow-2xl">
                 <div className="mb-4 flex items-start justify-between gap-4">
                     <div>
-                        <h2 className="text-2xl font-black text-[#111827]">Map Viewer</h2>
+                        <h2 className="text-2xl font-black text-[#111827]">Bản đồ 34 tỉnh / thành</h2>
                         <p className="text-sm text-[#6b7280]">
-                            {initialProvince ? `Selected province: ${initialProvince}` : "Select a province to inspect details."}
+                            {selectedName
+                                ? `Đang chọn: ${selectedName}`
+                                : "Nguồn dữ liệu địa phương nội bộ (34 tỉnh/thành), không dùng tile bản đồ có tranh chấp."}
                         </p>
                     </div>
                     <button
@@ -72,18 +192,30 @@ export function LeafletMapModal({ isOpen, onClose, initialProvince }: LeafletMap
                     </button>
                 </div>
 
-                <div className="overflow-hidden rounded-xl border border-[#d1d5db]">
-                    <MapContainer center={center} zoom={zoom} className="h-[420px] w-full" scrollWheelZoom>
-                        <TileLayer
-                            attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-                            url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-                        />
-                        {selected && (
-                            <CircleMarker center={selected.center} radius={10} pathOptions={{ color: "#BA252E", fillColor: "#FB7104", fillOpacity: 0.8 }}>
-                                <Popup>
-                                    <div className="font-semibold">{selected.label}</div>
-                                </Popup>
-                            </CircleMarker>
+                <div className="overflow-hidden rounded-xl border border-[#d1d5db] bg-[#f8fafc]">
+                    <MapContainer
+                        center={center}
+                        zoom={6}
+                        minZoom={5}
+                        maxZoom={9}
+                        maxBounds={VIETNAM_BOUNDS}
+                        maxBoundsViscosity={1.0}
+                        className="h-[420px] w-full"
+                        scrollWheelZoom
+                    >
+                        <ViewUpdater center={center} zoom={zoom} />
+                        {geoData && (
+                            <GeoJSON data={geoData as any} style={styleFeature as any} onEachFeature={handleEachFeature as any} />
+                        )}
+                        {!geoData && !loadError && (
+                            <Popup position={DEFAULT_CENTER}>
+                                <span>Đang tải dữ liệu ranh giới...</span>
+                            </Popup>
+                        )}
+                        {loadError && (
+                            <Popup position={DEFAULT_CENTER}>
+                                <span>{loadError}</span>
+                            </Popup>
                         )}
                     </MapContainer>
                 </div>
